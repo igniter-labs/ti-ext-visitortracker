@@ -1,4 +1,6 @@
-<?php namespace IgniterLabs\VisitorTracker\Database\Migrations;
+<?php
+
+namespace IgniterLabs\VisitorTracker\Database\Migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -6,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Schema;
 
 /**
- * Create igniter_visitortracker_tracker table
+ * Create igniter_visitortracker_tracker table.
  */
 class CreateVisitorTrackerTable extends Migration
 {

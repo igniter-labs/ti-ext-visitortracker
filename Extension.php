@@ -1,4 +1,6 @@
-<?php namespace IgniterLabs\VisitorTracker;
+<?php
+
+namespace IgniterLabs\VisitorTracker;
 
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
@@ -11,7 +13,7 @@ use Jenssegers\Agent\AgentServiceProvider;
 use System\Classes\BaseExtension;
 
 /**
- * VisitorTracker Extension Information File
+ * VisitorTracker Extension Information File.
  */
 class Extension extends BaseExtension
 {
@@ -30,8 +32,8 @@ class Extension extends BaseExtension
 
         $this->app->singleton('tracker.repository.manager', function ($app) {
             return new RepositoryManager(
-                new PageVisit,
-                new GeoIp
+                new PageVisit(),
+                new GeoIp()
             );
         });
 
@@ -47,8 +49,9 @@ class Extension extends BaseExtension
             );
         });
 
-        if (!$this->app->runningInAdmin())
+        if (!$this->app->runningInAdmin()) {
             $this->app['Illuminate\Contracts\Http\Kernel']->pushMiddleware(TrackVisitor::class);
+        }
     }
 
     /**
@@ -61,7 +64,7 @@ class Extension extends BaseExtension
         return [
             'IgniterLabs.VisitorTracker.ManageSettings' => [
                 'description' => 'Manage visitor tracker extension settings',
-                'group' => 'module',
+                'group'       => 'module',
             ],
         ];
     }
@@ -70,11 +73,11 @@ class Extension extends BaseExtension
     {
         return [
             'pagevisits' => [
-                'priority' => 50,
-                'class' => 'pagevisits',
-                'icon' => 'fa-globe',
-                'href' => admin_url('igniterlabs/visitortracker/pagevisits'),
-                'title' => lang('igniterlabs.visitortracker::default.text_title'),
+                'priority'   => 50,
+                'class'      => 'pagevisits',
+                'icon'       => 'fa-globe',
+                'href'       => admin_url('igniterlabs/visitortracker/pagevisits'),
+                'title'      => lang('igniterlabs.visitortracker::default.text_title'),
                 'permission' => 'IgniterLabs.VisitorTracker.*',
             ],
         ];
@@ -84,9 +87,9 @@ class Extension extends BaseExtension
     {
         return [
             'settings' => [
-                'label' => 'Visitor Tracker Settings',
+                'label'       => 'Visitor Tracker Settings',
                 'description' => 'Manage visitor tracker settings.',
-                'model' => 'IgniterLabs\VisitorTracker\Models\Settings',
+                'model'       => 'IgniterLabs\VisitorTracker\Models\Settings',
                 'permissions' => ['IgniterLabs.VisitorTracker.*'],
             ],
         ];
@@ -96,7 +99,7 @@ class Extension extends BaseExtension
     {
         return [
             \IgniterLabs\VisitorTracker\DashboardWidgets\PageViews::class => [
-                'label' => 'Page Views chart widget',
+                'label'   => 'Page Views chart widget',
                 'context' => 'dashboard',
             ],
         ];

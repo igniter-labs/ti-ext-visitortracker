@@ -63,7 +63,7 @@ class Settings extends Model
         // Remove temp file
         @unlink($tmpFile);
 
-        return TRUE;
+        return true;
     }
 
     public function getUpdateUrl()
@@ -78,8 +78,9 @@ class Settings extends Model
 
     public function ensureDatabaseExists()
     {
-        if (!File::exists($this->getDatabasePath()))
+        if (!File::exists($this->getDatabasePath())) {
             $this->updateMaxMindDatabase();
+        }
 
         return $this;
     }

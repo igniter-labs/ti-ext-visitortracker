@@ -20,8 +20,7 @@ class GeoIp extends Model
      */
     protected $primaryKey = 'id';
 
-    public $timestamps = TRUE;
+    public $timestamps = true;
 
     protected $guarded = [];
-
 }

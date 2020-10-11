@@ -1,4 +1,6 @@
-<?php namespace IgniterLabs\VisitorTracker\DashboardWidgets;
+<?php
+
+namespace IgniterLabs\VisitorTracker\DashboardWidgets;
 
 use Admin\Classes\BaseDashboardWidget;
 use Admin\Traits\HasChartDatasets;
@@ -17,11 +19,11 @@ class PageViews extends BaseDashboardWidget
     protected $defaultAlias = 'pageviews';
 
     protected $datasetOptions = [
-        'label' => null,
-        'data' => [],
-        'fill' => FALSE,
+        'label'           => null,
+        'data'            => [],
+        'fill'            => false,
         'backgroundColor' => null,
-        'borderColor' => null,
+        'borderColor'     => null,
     ];
 
     public function initialize()
@@ -33,7 +35,7 @@ class PageViews extends BaseDashboardWidget
     {
         return [
             'title' => [
-                'label' => 'admin::lang.dashboard.label_widget_title',
+                'label'   => 'admin::lang.dashboard.label_widget_title',
                 'default' => 'igniterlabs.visitortracker::default.views.text_title',
             ],
         ];
@@ -50,9 +52,9 @@ class PageViews extends BaseDashboardWidget
     protected function getDatasets($start, $end)
     {
         $config = [
-            'label' => 'igniterlabs.visitortracker::default.views.text_title',
-            'color' => '#64B5F6',
-            'model' => PageView::class,
+            'label'  => 'igniterlabs.visitortracker::default.views.text_title',
+            'color'  => '#64B5F6',
+            'model'  => PageView::class,
             'column' => 'created_at',
         ];
 
