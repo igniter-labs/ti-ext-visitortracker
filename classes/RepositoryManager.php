@@ -51,15 +51,16 @@ class RepositoryManager
             $foundModel = $model->create($attributes);
         }
 
-        if (!$foundModel->exists)
+        if (!$foundModel->exists) {
             return null;
+        }
 
         return $foundModel;
     }
 
     public function clearLog()
     {
-        if ($pastMonths = (int)Settings::get('archive_time_out', 3)) {
+        if ($pastMonths = (int) Settings::get('archive_time_out', 3)) {
             TrackerModel::whereDate('updated_at', '<=', Carbon::now()->subMonths($pastMonths))->delete();
         }
     }

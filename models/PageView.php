@@ -1,11 +1,11 @@
-<?php namespace IgniterLabs\VisitorTracker\Models;
+<?php
+
+namespace IgniterLabs\VisitorTracker\Models;
 
 use Model;
 
 /**
- * PageVisit Model Class
- *
- * @package Admin
+ * PageVisit Model Class.
  */
 class PageView extends Model
 {
@@ -25,11 +25,11 @@ class PageView extends Model
 
     protected $guarded = [];
 
-    public $timestamps = TRUE;
+    public $timestamps = true;
 
     public $relation = [
         'belongsTo' => [
-            'geoip' => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
+            'geoip'    => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
             'customer' => ['Admin\Models\Customers_model', 'foreignKey' => 'customer_id'],
         ],
     ];

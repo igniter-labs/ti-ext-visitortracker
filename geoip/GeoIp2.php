@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Log;
 class GeoIp2 extends AbstractReader
 {
     /**
-     * Fetch data from a remote geoapi service
+     * Fetch data from a remote geoapi service.
      *
      * @param string $ip
+     *
      * @return $this
      */
     public function retrieve($ip)
@@ -21,13 +22,12 @@ class GeoIp2 extends AbstractReader
         $licenseKey = Settings::get('geoip_reader_maxmind_license_key');
 
         try {
-            if (!strlen($accountId) OR !strlen($licenseKey))
+            if (!strlen($accountId) or !strlen($licenseKey)) {
                 throw new Exception('Missing GeoIP account ID or license key');
-
+            }
             $client = new Client($accountId, $licenseKey);
             $this->record = $client->city($ip);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Log::error($ex->getMessage());
         }
 
@@ -35,9 +35,10 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns an endpoint to fetch the record from
+     * Returns an endpoint to fetch the record from.
      *
      * @param string $ip IP address to fetch geoip record for
+     *
      * @return string
      */
     protected function getEndpoint($ip)
@@ -45,7 +46,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns latitude from the geoip record
+     * Returns latitude from the geoip record.
      *
      * @return string
      */
@@ -55,7 +56,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns longitude from the geoip record
+     * Returns longitude from the geoip record.
      *
      * @return string
      */
@@ -65,7 +66,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns region from the geoip record
+     * Returns region from the geoip record.
      *
      * @return string
      */
@@ -75,7 +76,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns region from the geoip record
+     * Returns region from the geoip record.
      *
      * @return string
      */
@@ -85,7 +86,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns city from the geoip record
+     * Returns city from the geoip record.
      *
      * @return string
      */
@@ -95,7 +96,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns postal code from the geoip record
+     * Returns postal code from the geoip record.
      *
      * @return string
      */
@@ -105,7 +106,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns country from the geoip record
+     * Returns country from the geoip record.
      *
      * @return string
      */
@@ -115,7 +116,7 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns country code from the geoip record
+     * Returns country code from the geoip record.
      *
      * @return string
      */

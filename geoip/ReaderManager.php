@@ -7,7 +7,6 @@ use Illuminate\Support\Manager;
 
 class ReaderManager extends Manager
 {
-
     /**
      * The default reader used to collect GeoIP data.
      *
@@ -32,7 +31,7 @@ class ReaderManager extends Manager
      */
     protected function createGeoip2Driver()
     {
-        return new GeoIp2(new HttpClient);
+        return new GeoIp2(new HttpClient());
     }
 
     /**
@@ -42,13 +41,14 @@ class ReaderManager extends Manager
      */
     protected function createIpstackDriver()
     {
-        return new Ipstack(new HttpClient);
+        return new Ipstack(new HttpClient());
     }
 
     /**
      * Set the default reader driver name.
      *
      * @param string $reader
+     *
      * @return void
      */
     public function setDefaultDriver($reader)

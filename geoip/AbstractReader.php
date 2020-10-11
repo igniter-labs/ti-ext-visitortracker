@@ -14,9 +14,9 @@ abstract class AbstractReader
     protected $http;
 
     /**
-     * Holds recorrd fetched from a remote geoapi service
+     * Holds recorrd fetched from a remote geoapi service.
      *
-     * @var Object
+     * @var object
      */
     protected $record;
 
@@ -24,6 +24,7 @@ abstract class AbstractReader
      * Create a new GeoIP reader instance.
      *
      * @param \GuzzleHttp\Client $http
+     *
      * @return void
      */
     public function __construct(HttpClient $http)
@@ -32,9 +33,10 @@ abstract class AbstractReader
     }
 
     /**
-     * Fetch data from a remote geoapi service
+     * Fetch data from a remote geoapi service.
      *
      * @param string $ip
+     *
      * @return $this
      */
     public function retrieve($ip)
@@ -53,64 +55,65 @@ abstract class AbstractReader
     }
 
     /**
-     * Returns an endpoint to fetch the record from
+     * Returns an endpoint to fetch the record from.
      *
      * @param string $ip IP address to fetch geoip record for
+     *
      * @return string
      */
     abstract protected function getEndpoint($ip);
 
     /**
-     * Returns latitude from the geoip record
+     * Returns latitude from the geoip record.
      *
      * @return string
      */
     abstract public function latitude();
 
     /**
-     * Returns longitude from the geoip record
+     * Returns longitude from the geoip record.
      *
      * @return string
      */
     abstract public function longitude();
 
     /**
-     * Returns region from the geoip record
+     * Returns region from the geoip record.
      *
      * @return string
      */
     abstract public function region();
 
     /**
-     * Returns region from the geoip record
+     * Returns region from the geoip record.
      *
      * @return string
      */
     abstract public function regionISOCode();
 
     /**
-     * Returns city from the geoip record
+     * Returns city from the geoip record.
      *
      * @return string
      */
     abstract public function city();
 
     /**
-     * Returns postal code from the geoip record
+     * Returns postal code from the geoip record.
      *
      * @return string
      */
     abstract public function postalCode();
 
     /**
-     * Returns country from the geoip record
+     * Returns country from the geoip record.
      *
      * @return string
      */
     abstract public function country();
 
     /**
-     * Returns country code from the geoip record
+     * Returns country code from the geoip record.
      *
      * @return string
      */

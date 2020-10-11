@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Log;
 class Ipstack extends AbstractReader
 {
     /**
-     * Returns an endpoint to fetch the record from
+     * Returns an endpoint to fetch the record from.
      *
      * @param string $ip IP address to fetch geoip record for
+     *
      * @return string
      */
     public function retrieve($ip)
@@ -23,8 +24,7 @@ class Ipstack extends AbstractReader
                 $record = json_decode($response->getBody()->getContents());
                 $this->record = $record->success ? $record : null;
             }
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Log::error($ex->getMessage());
         }
 
@@ -32,23 +32,25 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns an endpoint to fetch the record from
+     * Returns an endpoint to fetch the record from.
      *
      * @param string $ip IP address to fetch geoip record for
+     *
      * @return string
      */
     protected function getEndpoint($ip)
     {
         $accessKey = Settings::get('geoip_reader_ipstack_access_key');
 
-        if (!strlen($accessKey))
+        if (!strlen($accessKey)) {
             throw new Exception('Missing ipstack access key');
+        }
 
         return "http://api.ipstack.com/{$ip}?access_key={$accessKey}";
     }
 
     /**
-     * Returns latitude from the geoip record
+     * Returns latitude from the geoip record.
      *
      * @return string
      */
@@ -58,7 +60,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns longitude from the geoip record
+     * Returns longitude from the geoip record.
      *
      * @return string
      */
@@ -68,7 +70,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns region from the geoip record
+     * Returns region from the geoip record.
      *
      * @return string
      */
@@ -78,7 +80,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns region ISO code from the geoip record
+     * Returns region ISO code from the geoip record.
      *
      * @return string
      */
@@ -88,7 +90,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns city from the geoip record
+     * Returns city from the geoip record.
      *
      * @return string
      */
@@ -98,7 +100,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns postal code from the geoip record
+     * Returns postal code from the geoip record.
      *
      * @return string
      */
@@ -108,7 +110,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns country from the geoip record
+     * Returns country from the geoip record.
      *
      * @return string
      */
@@ -118,7 +120,7 @@ class Ipstack extends AbstractReader
     }
 
     /**
-     * Returns country ISO code from the geoip record
+     * Returns country ISO code from the geoip record.
      *
      * @return string
      */
