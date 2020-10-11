@@ -21,6 +21,9 @@ class GeoIp2 extends AbstractReader
         $licenseKey = Settings::get('geoip_reader_maxmind_license_key');
 
         try {
+            if (!strlen($accountId) OR !strlen($licenseKey))
+                throw new Exception('Missing GeoIP account ID or license key');
+
             $client = new Client($accountId, $licenseKey);
             $this->record = $client->city($ip);
         }

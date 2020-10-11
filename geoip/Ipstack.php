@@ -4,6 +4,7 @@ namespace IgniterLabs\VisitorTracker\Geoip;
 
 use Exception;
 use IgniterLabs\VisitorTracker\Models\Settings;
+use Illuminate\Support\Facades\Log;
 
 class Ipstack extends AbstractReader
 {
@@ -15,10 +16,16 @@ class Ipstack extends AbstractReader
      */
     public function retrieve($ip)
     {
-        $response = $this->http->get($this->getEndpoint($ip));
-        if ($response->getStatusCode() == 200) {
-            $record = json_decode($response->getBody()->getContents());
-            $this->record = $record->success ? $record : null;
+        try {
+            $response = $this->http->get($this->getEndpoint($ip));
+
+            if ($response->getStatusCode() == 200) {
+                $record = json_decode($response->getBody()->getContents());
+                $this->record = $record->success ? $record : null;
+            }
+        }
+        catch (Exception $ex) {
+            Log::error($ex->getMessage());
         }
 
         return $this;
