@@ -1,0 +1,11 @@
+{
+  "code": "igniterlabs.visitortracker",
+  "name": "Visitor Tracker",
+  "description": "Enables page views & visitor tracking",
+  "version": "v1.0.0",
+  "author": "Igniter Labs",
+  "icon": {
+    "image": "icon.svg"
+  },
+  "homepage": "https://tastyigniter.com/marketplace/item/igniterlabs-visitortracker"
+}

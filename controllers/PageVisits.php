@@ -1,0 +1,42 @@
+<?php namespace IgniterLabs\VisitorTracker\Controllers;
+
+use AdminMenu;
+
+class PageVisits extends \Admin\Classes\AdminController
+{
+    public $implement = [
+        'Admin\Actions\ListController',
+    ];
+
+    public $listConfig = [
+        'list' => [
+            'model' => 'IgniterLabs\VisitorTracker\Models\PageVisit',
+            'title' => 'lang:igniterlabs.visitortracker::default.text_title',
+            'emptyMessage' => 'lang:igniterlabs.visitortracker::default.text_empty',
+            'defaultSort' => ['last_activity', 'DESC'],
+            'showCheckboxes' => FALSE,
+            'configFile' => 'pagevisit',
+        ],
+    ];
+
+    protected $requiredPermissions = 'IgniterLabs.VisitorTracker.*';
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        AdminMenu::setContext('pagevisits');
+    }
+
+    public function index()
+    {
+        app('tracker')->clearOldLog();
+
+        $this->asExtension('ListController')->index();
+    }
+
+    public function listExtendQuery($query)
+    {
+        $query->with(['geoip', 'customer'])->distinct()->groupBy('ip_address');
+    }
+}
