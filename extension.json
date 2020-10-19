@@ -5,7 +5,8 @@
   "version": "v1.0.1",
   "author": "Igniter Labs",
   "icon": {
-    "image": "icon.svg"
+    "image": "icon.svg",
+    "backgroundColor": "#FFF"
   },
   "homepage": "https://tastyigniter.com/marketplace/item/igniterlabs-visitortracker"
 }
