@@ -25,10 +25,11 @@ class GeoIp2 extends AbstractReader
             if (!strlen($accountId) or !strlen($licenseKey)) {
                 throw new Exception('Missing GeoIP account ID or license key');
             }
-            $client = new Client($accountId, $licenseKey);
+            $client = new Client((int)$accountId, $licenseKey);
             $this->record = $client->city($ip);
-        } catch (Exception $ex) {
-            Log::error($ex->getMessage());
+        }
+        catch (Exception $ex) {
+            Log::error('GeoIp2 Error -> '.$ex->getMessage());
         }
 
         return $this;

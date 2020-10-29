@@ -22,10 +22,15 @@ class Ipstack extends AbstractReader
 
             if ($response->getStatusCode() == 200) {
                 $record = json_decode($response->getBody()->getContents());
-                $this->record = $record->success ? $record : null;
+
+                if (isset($record->error))
+                    throw new Exception($record->error->info);
+
+                $this->record = isset($record->success) ? $record : null;
             }
-        } catch (Exception $ex) {
-            Log::error($ex->getMessage());
+        }
+        catch (Exception $ex) {
+            Log::error('Ipstack Error -> '.$ex->getMessage());
         }
 
         return $this;
