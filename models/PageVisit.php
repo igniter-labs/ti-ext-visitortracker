@@ -28,16 +28,16 @@ class PageVisit extends Model
 
     protected $guarded = [];
 
-    public $timestamps = true;
+    public $timestamps = TRUE;
 
     public $relation = [
         'belongsTo' => [
-            'geoip'    => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
+            'geoip' => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
             'customer' => ['Admin\Models\Customers_model', 'foreignKey' => 'customer_id'],
         ],
     ];
 
-    public $casts = [
+    protected $casts = [
         'headers' => 'array',
     ];
 
