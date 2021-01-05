@@ -2,7 +2,6 @@
   "name": "igniterlabs/visitortracker",
   "type": "igniter-extension",
   "require": {
-    "php": ">=7.1",
     "geoip2/geoip2": "~2.0",
     "jenssegers/agent": "~2.6"
   },
