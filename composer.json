@@ -1,6 +1,6 @@
 {
   "name": "igniterlabs/visitortracker",
-  "type": "igniter-extension",
+  "type": "tastyigniter-extension",
   "require": {
     "geoip2/geoip2": "~2.0",
     "jenssegers/agent": "~2.6"
