@@ -2,7 +2,7 @@
   "code": "igniterlabs.visitortracker",
   "name": "Visitor Tracker",
   "description": "Enables you track to your visitors, browsers, operating systems, page views & visits on your TastyIgniter website.",
-  "version": "v1.1.0",
+  "version": "v1.1.1",
   "author": "Igniter Labs",
   "icon": {
     "image": "icon.svg",
