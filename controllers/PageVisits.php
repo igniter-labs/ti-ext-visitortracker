@@ -2,7 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker\Controllers;
 
-use AdminMenu;
+use Admin\Facades\AdminMenu;
 
 class PageVisits extends \Admin\Classes\AdminController
 {

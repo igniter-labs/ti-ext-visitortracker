@@ -3,9 +3,9 @@
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Carbon\Carbon;
-use Country;
+use Igniter\Flame\Database\Model;
 use Jenssegers\Agent\Agent;
-use Model;
+use System\Facades\Country;
 
 /**
  * PageVisit Model Class.

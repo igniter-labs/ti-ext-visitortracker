@@ -2,7 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker\Models;
 
-use Model;
+use Igniter\Flame\Database\Model;
 
 class GeoIp extends Model
 {
@@ -20,7 +20,7 @@ class GeoIp extends Model
      */
     protected $primaryKey = 'id';
 
-    public $timestamps = true;
+    public $timestamps = TRUE;
 
     protected $guarded = [];
 }

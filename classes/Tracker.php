@@ -2,6 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker\Classes;
 
+use Igniter\Flame\Support\Str;
 use IgniterLabs\VisitorTracker\Geoip\AbstractReader;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
 use IgniterLabs\VisitorTracker\Models\Settings;
@@ -9,7 +10,6 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Jenssegers\Agent\Agent;
-use Str;
 
 class Tracker
 {
@@ -62,7 +62,7 @@ class Tracker
             $this->track();
         }
 
-        $this->booted = true;
+        $this->booted = TRUE;
     }
 
     public function track()
@@ -79,7 +79,7 @@ class Tracker
 
     protected function isTrackable()
     {
-        return ((bool) $this->config->get('status', true))
+        return ((bool)$this->config->get('status', TRUE))
             and $this->isTrackableIp()
             and $this->robotIsTrackable()
             and $this->routeIsTrackable()
@@ -97,10 +97,10 @@ class Tracker
 
     protected function robotIsTrackable()
     {
-        $trackRobots = (bool) $this->config->get('track_robots', false);
+        $trackRobots = (bool)$this->config->get('track_robots', FALSE);
 
         if (!$this->agent->isRobot()) {
-            return true;
+            return TRUE;
         }
 
         return $this->agent->isRobot() and $trackRobots;
@@ -109,7 +109,7 @@ class Tracker
     protected function routeIsTrackable()
     {
         if (!$this->route) {
-            return false;
+            return FALSE;
         }
 
         $currentRouteName = $this->route->currentRouteName();
@@ -133,16 +133,16 @@ class Tracker
     protected function getLogData()
     {
         return [
-            'session_id'   => $this->session->getId(),
-            'ip_address'   => $this->request->getClientIp(),
-            'access_type'  => $this->request->method(),
-            'geoip_id'     => $this->getGeoIpId(),
-            'request_uri'  => $this->request->path(),
-            'query'        => $this->request->getQueryString(),
+            'session_id' => $this->session->getId(),
+            'ip_address' => $this->request->getClientIp(),
+            'access_type' => $this->request->method(),
+            'geoip_id' => $this->getGeoIpId(),
+            'request_uri' => $this->request->path(),
+            'query' => $this->request->getQueryString(),
             'referrer_uri' => $this->getReferer(),
-            'user_agent'   => $this->request->userAgent(),
-            'headers'      => $this->request->headers->all(),
-            'browser'      => $this->agent->browser(),
+            'user_agent' => $this->request->userAgent(),
+            'headers' => $this->request->headers->all(),
+            'browser' => $this->agent->browser(),
         ];
     }
 
@@ -184,11 +184,11 @@ class Tracker
     protected function getGeoIpData(AbstractReader $reader)
     {
         return [
-            'latitude'           => $reader->latitude(),
-            'longitude'          => $reader->longitude(),
-            'region'             => $reader->region(),
-            'city'               => $reader->city(),
-            'postal_code'        => $reader->postalCode(),
+            'latitude' => $reader->latitude(),
+            'longitude' => $reader->longitude(),
+            'region' => $reader->region(),
+            'city' => $reader->city(),
+            'postal_code' => $reader->postalCode(),
             'country_iso_code_2' => $reader->countryISOCode(),
         ];
     }
@@ -205,11 +205,11 @@ class Tracker
 
         foreach ($excludeRange as $range) {
             if ($this->ipInRange($ip, $range)) {
-                return false;
+                return FALSE;
             }
         }
 
-        return true;
+        return TRUE;
     }
 
     protected function ipInRange($ip, $range)
@@ -265,10 +265,10 @@ class Tracker
     {
         foreach ($patterns as $pattern) {
             if (Str::is($pattern, $what)) {
-                return true;
+                return TRUE;
             }
         }
 
-        return false;
+        return FALSE;
     }
 }

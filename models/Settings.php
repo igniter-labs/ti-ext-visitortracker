@@ -3,10 +3,10 @@
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Exception;
-use File;
+use Igniter\Flame\Database\Model;
+use Igniter\Flame\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 use Main\Classes\ThemeManager;
-use Model;
-use Route;
 
 class Settings extends Model
 {
@@ -63,7 +63,7 @@ class Settings extends Model
         // Remove temp file
         @unlink($tmpFile);
 
-        return true;
+        return TRUE;
     }
 
     public function getUpdateUrl()

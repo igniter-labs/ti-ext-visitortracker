@@ -2,7 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker\Models;
 
-use Model;
+use Igniter\Flame\Database\Model;
 
 /**
  * PageVisit Model Class.
@@ -25,11 +25,11 @@ class PageView extends Model
 
     protected $guarded = [];
 
-    public $timestamps = true;
+    public $timestamps = TRUE;
 
     public $relation = [
         'belongsTo' => [
-            'geoip'    => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
+            'geoip' => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
             'customer' => ['Admin\Models\Customers_model', 'foreignKey' => 'customer_id'],
         ],
     ];
