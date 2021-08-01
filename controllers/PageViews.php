@@ -12,12 +12,12 @@ class PageViews extends \Admin\Classes\AdminController
 
     public $listConfig = [
         'list' => [
-            'model'          => 'IgniterLabs\VisitorTracker\Models\PageView',
-            'title'          => 'lang:igniterlabs.visitortracker::default.views.text_title',
-            'emptyMessage'   => 'lang:igniterlabs.visitortracker::default.views.text_empty',
-            'defaultSort'    => ['page_views', 'DESC'],
-            'showCheckboxes' => false,
-            'configFile'     => 'pageview',
+            'model' => 'IgniterLabs\VisitorTracker\Models\PageView',
+            'title' => 'lang:igniterlabs.visitortracker::default.views.text_title',
+            'emptyMessage' => 'lang:igniterlabs.visitortracker::default.views.text_empty',
+            'defaultSort' => ['page_views', 'DESC'],
+            'showCheckboxes' => FALSE,
+            'configFile' => 'pageview',
         ],
     ];
 
