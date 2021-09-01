@@ -60,8 +60,8 @@ class RepositoryManager
 
     public function clearLog()
     {
-        if ($pastMonths = (int) Settings::get('archive_time_out', 3)) {
-            TrackerModel::whereDate('updated_at', '<=', Carbon::now()->subMonths($pastMonths))->delete();
+        if ($pastMonths = (int)Settings::get('archive_time_out', 3)) {
+            TrackerModel::where('updated_at', '<=', Carbon::now()->subMonths($pastMonths))->delete();
         }
     }
 }
