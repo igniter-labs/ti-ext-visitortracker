@@ -3,7 +3,7 @@
   "name": "Visitor Tracker",
   "description": "Enables you track to your visitors, browsers, operating systems, page views & visits on your TastyIgniter website.",
   "version": "v1.1.2",
-  "author": "Igniter Labs",
+  "author": "Igniter Labs Team",
   "icon": {
     "image": "icon.svg",
     "backgroundColor": "#FFF"
