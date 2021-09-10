@@ -4,10 +4,5 @@
   "require": {
     "geoip2/geoip2": "~2.0",
     "jenssegers/agent": "~2.6"
-  },
-  "config": {
-    "preferred-install": "dist"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
