@@ -80,10 +80,10 @@ class Tracker
     protected function isTrackable()
     {
         return ((bool)$this->config->get('status', TRUE))
-            and $this->isTrackableIp()
-            and $this->robotIsTrackable()
-            and $this->routeIsTrackable()
-            and $this->pathIsTrackable();
+            && $this->isTrackableIp()
+            && $this->robotIsTrackable()
+            && $this->routeIsTrackable()
+            && $this->pathIsTrackable();
     }
 
     protected function isTrackableIp()
@@ -92,7 +92,7 @@ class Tracker
         $excludeIps = $this->config->get('exclude_ips');
 
         return !$excludeIps
-            or $this->ipNotInRanges($ipAddress, $excludeIps);
+            || $this->ipNotInRanges($ipAddress, $excludeIps);
     }
 
     protected function robotIsTrackable()
@@ -103,7 +103,7 @@ class Tracker
             return TRUE;
         }
 
-        return $this->agent->isRobot() and $trackRobots;
+        return $this->agent->isRobot() && $trackRobots;
     }
 
     protected function routeIsTrackable()
@@ -116,8 +116,8 @@ class Tracker
         $excludeRoutes = $this->explodeString($this->config->get('exclude_routes'));
 
         return !$excludeRoutes
-            or !$currentRouteName
-            or !$this->matchesPattern($currentRouteName, $excludeRoutes);
+            || !$currentRouteName
+            || !$this->matchesPattern($currentRouteName, $excludeRoutes);
     }
 
     protected function pathIsTrackable()
@@ -126,8 +126,8 @@ class Tracker
         $excludePaths = $this->explodeString($this->config->get('exclude_paths'));
 
         return !$excludePaths
-            or empty($currentPath)
-            or !$this->matchesPattern($currentPath, $excludePaths);
+            || empty($currentPath)
+            || !$this->matchesPattern($currentPath, $excludePaths);
     }
 
     protected function getLogData()
@@ -224,7 +224,7 @@ class Tracker
         if ($parsedRange = $this->ipRangeIsDashed($range)) {
             [$ip1, $ip2] = $parsedRange;
 
-            return ip2long($ip) >= $ip1 and ip2long($ip) <= $ip2;
+            return ip2long($ip) >= $ip1 && ip2long($ip) <= $ip2;
         }
 
         // Masked range or fixed IP
@@ -236,7 +236,7 @@ class Tracker
 
     protected function ipRangeIsWildCard($range)
     {
-        if (!str_contains($range, '-') and str_contains($range, '*')) {
+        if (!str_contains($range, '-') && str_contains($range, '*')) {
             return str_replace('*', '0', $range).'-'.str_replace('*', '255', $range);
         }
 

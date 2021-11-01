@@ -133,7 +133,7 @@ class PageVisit extends Model
 
     protected function applyAgentClass()
     {
-        if (empty($this->user_agent) or !count($this->headers)) {
+        if (empty($this->user_agent) || !count($this->headers)) {
             return;
         }
 
