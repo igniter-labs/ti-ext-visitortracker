@@ -58,7 +58,7 @@ class CreateVisitorTrackerTable extends Migration
 
         Schema::create('igniterlabs_visitortracker_tracker', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('activity_id')->unsigned();
+            $table->bigIncrements('activity_id');
             $table->integer('customer_id');
             $table->string('access_type')->nullable();
             $table->string('browser')->nullable();
@@ -75,7 +75,6 @@ class CreateVisitorTrackerTable extends Migration
             $table->text('query')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->primary('activity_id');
         });
     }
 
