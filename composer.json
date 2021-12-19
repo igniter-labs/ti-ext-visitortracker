@@ -1,8 +1,26 @@
 {
-  "name": "igniterlabs/visitortracker",
+  "name": "igniterlabs/ti-ext-visitortracker",
   "type": "tastyigniter-extension",
+  "description": "Enables you track to your visitors, browsers, operating systems, page views & visits on your TastyIgniter website.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Igniter Labs Team"
+    }
+  ],
   "require": {
     "geoip2/geoip2": "~2.0",
     "jenssegers/agent": "~2.6"
+  },
+  "extra": {
+    "tastyigniter-extension": {
+      "code": "igniterlabs.visitortracker",
+      "name": "Visitor Tracker",
+      "icon": {
+        "image": "icon.svg",
+        "backgroundColor": "#FFF"
+      },
+      "homepage": "https://tastyigniter.com/marketplace/item/igniterlabs-visitortracker"
+    }
   }
 }
