@@ -7,7 +7,7 @@ use Admin\Facades\AdminMenu;
 class PageViews extends \Admin\Classes\AdminController
 {
     public $implement = [
-        'Admin\Actions\ListController',
+        \Admin\Actions\ListController::class,
     ];
 
     public $listConfig = [

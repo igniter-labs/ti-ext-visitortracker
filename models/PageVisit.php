@@ -29,7 +29,7 @@ class PageVisit extends Model
     public $relation = [
         'belongsTo' => [
             'geoip' => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
-            'customer' => ['Admin\Models\Customers_model', 'foreignKey' => 'customer_id'],
+            'customer' => [\Admin\Models\Customers_model::class, 'foreignKey' => 'customer_id'],
         ],
     ];
 
