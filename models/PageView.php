@@ -25,7 +25,7 @@ class PageView extends Model
 
     public $relation = [
         'belongsTo' => [
-            'geoip' => ['IgniterLabs\VisitorTracker\Models\GeoIp'],
+            'geoip' => [\IgniterLabs\VisitorTracker\Models\GeoIp::class],
             'customer' => [\Admin\Models\Customers_model::class, 'foreignKey' => 'customer_id'],
         ],
     ];

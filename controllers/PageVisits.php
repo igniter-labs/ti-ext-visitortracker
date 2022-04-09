@@ -12,7 +12,7 @@ class PageVisits extends \Admin\Classes\AdminController
 
     public $listConfig = [
         'list' => [
-            'model' => 'IgniterLabs\VisitorTracker\Models\PageVisit',
+            'model' => \IgniterLabs\VisitorTracker\Models\PageVisit::class,
             'title' => 'lang:igniterlabs.visitortracker::default.text_title',
             'emptyMessage' => 'lang:igniterlabs.visitortracker::default.text_empty',
             'defaultSort' => ['last_activity', 'DESC'],
