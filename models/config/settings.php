@@ -6,7 +6,7 @@ return [
             'buttons' => [
                 'back' => [
                     'label' => 'lang:admin::lang.button_icon_back',
-                    'class' => 'btn btn-default',
+                    'class' => 'btn btn-outline-secondary',
                     'href' => 'settings',
                 ],
                 'save' => [
@@ -22,13 +22,13 @@ return [
                 'label' => 'lang:igniterlabs.visitortracker::default.label_status',
                 'type' => 'switch',
                 'span' => 'left',
-                'default' => TRUE,
+                'default' => true,
             ],
             'track_robots' => [
                 'label' => 'lang:igniterlabs.visitortracker::default.label_track_robots',
                 'type' => 'switch',
                 'span' => 'right',
-                'default' => FALSE,
+                'default' => false,
             ],
             'exclude_routes' => [
                 'label' => 'lang:igniterlabs.visitortracker::default.label_exclude_routes',
