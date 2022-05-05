@@ -21,7 +21,7 @@ class PageView extends Model
 
     protected $guarded = [];
 
-    public $timestamps = TRUE;
+    public $timestamps = true;
 
     public $relation = [
         'belongsTo' => [

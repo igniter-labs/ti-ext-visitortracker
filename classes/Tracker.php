@@ -62,7 +62,7 @@ class Tracker
             $this->track();
         }
 
-        $this->booted = TRUE;
+        $this->booted = true;
     }
 
     public function track()
@@ -79,7 +79,7 @@ class Tracker
 
     protected function isTrackable()
     {
-        return ((bool)$this->config->get('status', TRUE))
+        return ((bool)$this->config->get('status', true))
             && $this->isTrackableIp()
             && $this->robotIsTrackable()
             && $this->routeIsTrackable()
@@ -97,10 +97,10 @@ class Tracker
 
     protected function robotIsTrackable()
     {
-        $trackRobots = (bool)$this->config->get('track_robots', FALSE);
+        $trackRobots = (bool)$this->config->get('track_robots', false);
 
         if (!$this->agent->isRobot()) {
-            return TRUE;
+            return true;
         }
 
         return $this->agent->isRobot() && $trackRobots;
@@ -109,7 +109,7 @@ class Tracker
     protected function routeIsTrackable()
     {
         if (!$this->route) {
-            return FALSE;
+            return false;
         }
 
         $currentRouteName = $this->route->currentRouteName();
@@ -205,11 +205,11 @@ class Tracker
 
         foreach ($excludeRange as $range) {
             if ($this->ipInRange($ip, $range)) {
-                return FALSE;
+                return false;
             }
         }
 
-        return TRUE;
+        return true;
     }
 
     protected function ipInRange($ip, $range)
@@ -265,10 +265,10 @@ class Tracker
     {
         foreach ($patterns as $pattern) {
             if (Str::is($pattern, $what)) {
-                return TRUE;
+                return true;
             }
         }
 
-        return FALSE;
+        return false;
     }
 }

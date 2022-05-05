@@ -16,7 +16,7 @@ class PageVisits extends \Admin\Classes\AdminController
             'title' => 'lang:igniterlabs.visitortracker::default.text_title',
             'emptyMessage' => 'lang:igniterlabs.visitortracker::default.text_empty',
             'defaultSort' => ['last_activity', 'DESC'],
-            'showCheckboxes' => FALSE,
+            'showCheckboxes' => false,
             'configFile' => 'pagevisit',
         ],
     ];
