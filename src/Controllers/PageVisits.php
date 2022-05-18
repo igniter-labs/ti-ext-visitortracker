@@ -2,12 +2,12 @@
 
 namespace IgniterLabs\VisitorTracker\Controllers;
 
-use Admin\Facades\AdminMenu;
+use Igniter\Admin\Facades\AdminMenu;
 
-class PageVisits extends \Admin\Classes\AdminController
+class PageVisits extends \Igniter\Admin\Classes\AdminController
 {
     public $implement = [
-        \Admin\Actions\ListController::class,
+        \Igniter\Admin\Actions\ListController::class,
     ];
 
     public $listConfig = [

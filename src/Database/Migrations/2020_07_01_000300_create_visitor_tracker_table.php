@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Create igniter_visitortracker_tracker table.
  */
-class CreateVisitorTrackerTable extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         DB::table('extension_settings')
@@ -98,4 +97,4 @@ class CreateVisitorTrackerTable extends Migration
             $table->timestamps();
         });
     }
-}
+};

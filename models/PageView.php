@@ -1,32 +1,40 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Models;
-
-use Igniter\Flame\Database\Model;
-
-/**
- * PageVisit Model Class.
- */
-class PageView extends Model
-{
-    /**
-     * @var string The database table name
-     */
-    protected $table = 'igniterlabs_visitortracker_tracker';
-
-    /**
-     * @var string The database table primary key
-     */
-    protected $primaryKey = 'activity_id';
-
-    protected $guarded = [];
-
-    public $timestamps = true;
-
-    public $relation = [
-        'belongsTo' => [
-            'geoip' => [\IgniterLabs\VisitorTracker\Models\GeoIp::class],
-            'customer' => [\Admin\Models\Customers_model::class, 'foreignKey' => 'customer_id'],
+return [
+    'list' => [
+        'filter' => [
+            'scopes' => [
+                'date' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.text_filter_date',
+                    'type' => 'date',
+                    'conditions' => 'YEAR(updated_at) = :year AND MONTH(updated_at) = :month AND DAY(updated_at) = :day',
+                ],
+            ],
         ],
-    ];
-}
+        'toolbar' => [
+            'buttons' => [
+                'visits' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.button_page_visits',
+                    'class' => 'btn btn-default',
+                    'href' => 'igniterlabs/visitortracker/pagevisits',
+                ],
+                'settings' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.button_settings',
+                    'class' => 'btn btn-default',
+                    'href' => 'extensions/edit/igniterlabs/visitortracker/settings',
+                ],
+            ],
+        ],
+        'columns' => [
+            'request_uri' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_request_uri',
+                'type' => 'text',
+            ],
+            'page_views' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_views',
+                'type' => 'text',
+                'select' => 'COUNT(request_uri)',
+            ],
+        ],
+    ],
+];

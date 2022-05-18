@@ -2,8 +2,8 @@
 
 namespace IgniterLabs\VisitorTracker\DashboardWidgets;
 
-use Admin\Classes\BaseDashboardWidget;
-use Admin\Traits\HasChartDatasets;
+use Igniter\Admin\Classes\BaseDashboardWidget;
+use Igniter\Admin\Traits\HasChartDatasets;
 use IgniterLabs\VisitorTracker\Models\PageView;
 
 /**

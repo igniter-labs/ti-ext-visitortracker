@@ -1,174 +1,95 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Models;
-
-use Carbon\Carbon;
-use Igniter\Flame\Database\Model;
-use Jenssegers\Agent\Agent;
-use System\Facades\Country;
-
-/**
- * PageVisit Model Class.
- */
-class PageVisit extends Model
-{
-    /**
-     * @var string The database table name
-     */
-    protected $table = 'igniterlabs_visitortracker_tracker';
-
-    /**
-     * @var string The database table primary key
-     */
-    protected $primaryKey = 'activity_id';
-
-    protected $guarded = [];
-
-    public $timestamps = true;
-
-    public $relation = [
-        'belongsTo' => [
-            'geoip' => [\IgniterLabs\VisitorTracker\Models\GeoIp::class],
-            'customer' => [\Admin\Models\Customers_model::class, 'foreignKey' => 'customer_id'],
+return [
+    'list' => [
+        'filter' => [
+            'search' => [
+                'prompt' => 'lang:igniterlabs.visitortracker::default.text_filter_search',
+                'mode' => 'all', // or any, exact
+            ],
+            'scopes' => [
+                'access' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.text_filter_access',
+                    'type' => 'select',
+                    'conditions' => 'access_type = :filtered',
+                    'options' => [
+                        'browser' => 'lang:igniterlabs.visitortracker::default.text_browser',
+                        'mobile' => 'lang:igniterlabs.visitortracker::default.text_mobile',
+                        'robot' => 'lang:igniterlabs.visitortracker::default.text_robot',
+                    ],
+                ],
+                'date' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.text_filter_date',
+                    'type' => 'date',
+                    'conditions' => 'YEAR(updated_at) = :year AND MONTH(updated_at) = :month AND DAY(updated_at) = :day',
+                ],
+                'recent' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.text_filter_online',
+                    'type' => 'checkbox',
+                    'scope' => 'isOnline',
+                ],
+            ],
         ],
-    ];
-
-    protected $casts = [
-        'headers' => 'array',
-    ];
-
-    /**
-     * @var Agent
-     */
-    protected $agentClass;
-
-    protected function afterFetch()
-    {
-        $this->applyAgentClass();
-    }
-
-    //
-    // Accessors & Mutators
-    //
-
-    public function getAccessTypeAttribute($value)
-    {
-        return ucwords($value);
-    }
-
-    public function getDateAddedAttribute($value)
-    {
-        return time_elapsed($value);
-    }
-
-    public function getCountryNameAttribute()
-    {
-        if (!$this->geoip) {
-            return null;
-        }
-
-        return Country::getCountryNameByCode($this->geoip->country_iso_code_2);
-    }
-
-    public function getCountryCityAttribute()
-    {
-        return $this->country_name.' - '.($this->geoip ? $this->geoip->city : null);
-    }
-
-    public function getCustomerNameAttribute()
-    {
-        if (!$this->customer) {
-            return lang('igniterlabs.visitortracker::default.text_guest');
-        }
-
-        return $this->customer->full_name;
-    }
-
-    protected function getPlatformAttribute()
-    {
-        if (!$this->agentClass) {
-            return null;
-        }
-
-        $platform = $this->agentClass->platform();
-
-        if ($this->agentClass->isRobot()) {
-            return lang('igniterlabs.visitortracker::default.text_robot')
-                .' ['.$platform.']';
-        }
-
-        if ($this->agentClass->isTablet()) {
-            return lang('igniterlabs.visitortracker::default.text_tablet')
-                .' ['.$platform.'] ['.$this->agentClass->device().']';
-        }
-
-        if ($this->agentClass->isMobile()) {
-            return lang('igniterlabs.visitortracker::default.text_tablet')
-                .' ['.$platform.'] ['.$this->agentClass->device().']';
-        }
-
-        if ($this->agentClass->isDesktop()) {
-            return lang('igniterlabs.visitortracker::default.text_computer')
-                .' ['.$platform.']';
-        }
-    }
-
-    //
-    // Scopes
-    //
-
-    public function scopeIsOnline($query, $value)
-    {
-        if ($value) {
-            $onlineTimeOut = Settings::get('online_time_out', 5);
-            $query->where('created_at', '>=', Carbon::now()->subMinutes($onlineTimeOut));
-        }
-
-        return $query;
-    }
-
-    //
-    // Helpers
-    //
-
-    protected function applyAgentClass()
-    {
-        if (empty($this->user_agent) || !count($this->headers)) {
-            return;
-        }
-
-        $agent = new Agent();
-
-        $agent->setUserAgent($userAgent = $this->user_agent);
-        $agent->setHttpHeaders($headers = $this->headers);
-
-        $this->agentClass = $agent;
-    }
-
-    public function getAgent()
-    {
-        return $this->agentClass;
-    }
-
-    /**
-     * Find when a customer was last online by ip.
-     *
-     * @param string $ip the IP address of the current user
-     *
-     * @return array
-     */
-    public function getLastOnline($ip)
-    {
-        return $this->selectRaw('*, MAX(created_at) as created_at')->where('ip_address', $ip)->first();
-    }
-
-    /**
-     * Return the last online dates of all customers.
-     *
-     * @return array
-     */
-    public function getOnlineDates()
-    {
-        return $this->pluckDates('created_at');
-    }
-}
+        'toolbar' => [
+            'buttons' => [
+                'views' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.button_page_views',
+                    'class' => 'btn btn-default',
+                    'href' => 'igniterlabs/visitortracker/pageviews',
+                ],
+                'settings' => [
+                    'label' => 'lang:igniterlabs.visitortracker::default.button_settings',
+                    'class' => 'btn btn-default',
+                    'href' => 'extensions/edit/igniterlabs/visitortracker/settings',
+                ],
+            ],
+        ],
+        'columns' => [
+            'ip_address' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_ip',
+                'type' => 'text',
+                'searchable' => true,
+            ],
+            'country_city' => [
+                'label' => 'lang:admin::lang.label_name',
+                'type' => 'text',
+                'sortable' => false,
+            ],
+            'page_views' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_views',
+                'type' => 'text',
+                'select' => 'COUNT(ip_address)',
+            ],
+            'customer_name' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_customer',
+                'relation' => 'customer',
+                'select' => 'concat(first_name, " ", last_name)',
+                'searchable' => true,
+            ],
+            'access_type' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_access',
+                'type' => 'text',
+                'searchable' => true,
+            ],
+            'platform' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_platform',
+                'type' => 'text',
+                'searchable' => true,
+            ],
+            'browser' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_browser',
+                'type' => 'text',
+                'searchable' => true,
+            ],
+            'referrer_uri' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_referrer_url',
+                'type' => 'text',
+            ],
+            'last_activity' => [
+                'label' => 'lang:igniterlabs.visitortracker::default.column_last_activity',
+                'type' => 'timesince',
+                'select' => 'MAX(updated_at)',
+            ],
+        ],
+    ],
+];

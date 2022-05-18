@@ -2,6 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker;
 
+use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
@@ -10,7 +11,6 @@ use IgniterLabs\VisitorTracker\Models\GeoIp;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
 use Jenssegers\Agent\AgentServiceProvider;
-use System\Classes\BaseExtension;
 
 /**
  * VisitorTracker Extension Information File.
