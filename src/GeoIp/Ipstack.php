@@ -1,6 +1,6 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Geoip;
+namespace IgniterLabs\VisitorTracker\GeoIp;
 
 use Exception;
 use IgniterLabs\VisitorTracker\Models\Settings;

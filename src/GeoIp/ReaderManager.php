@@ -1,6 +1,6 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Geoip;
+namespace IgniterLabs\VisitorTracker\GeoIp;
 
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\Manager;

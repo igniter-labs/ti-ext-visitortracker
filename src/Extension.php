@@ -2,6 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker;
 
+use Igniter\Igniter;
 use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
@@ -49,7 +50,7 @@ class Extension extends BaseExtension
             );
         });
 
-        if (!$this->app->runningInAdmin()) {
+        if (!Igniter::runningInAdmin()) {
             $this->app[\Illuminate\Contracts\Http\Kernel::class]->pushMiddleware(TrackVisitor::class);
         }
     }

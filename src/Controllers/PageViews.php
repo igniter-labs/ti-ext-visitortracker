@@ -7,7 +7,7 @@ use Igniter\Admin\Facades\AdminMenu;
 class PageViews extends \Igniter\Admin\Classes\AdminController
 {
     public $implement = [
-        \Igniter\Admin\Actions\ListController::class,
+        \Igniter\Admin\Http\Actions\ListController::class,
     ];
 
     public $listConfig = [
