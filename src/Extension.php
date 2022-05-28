@@ -2,7 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker;
 
-use Igniter\Igniter;
+use Igniter\Flame\Igniter;
 use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;

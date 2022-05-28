@@ -32,7 +32,7 @@ class Settings extends Model
     public function listAvailablePages()
     {
         $pages = [];
-        $theme = ThemeManager::instance()->getActiveTheme();
+        $theme = resolve(ThemeManager::class)->getActiveTheme();
         foreach ($theme->listPages() as $page) {
             $name = $page->getBaseFileName();
             $pages[$name] = $name;
