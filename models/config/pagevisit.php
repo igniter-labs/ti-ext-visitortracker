@@ -51,8 +51,8 @@ return [
                 'searchable' => true,
             ],
             'country_city' => [
-                'label' => 'lang:admin::lang.label_name',
-                'type' => 'text',
+                'label' => 'lang:igniterlabs.visitortracker::default.column_country_city',
+                'relation' => 'geoip',
                 'sortable' => false,
             ],
             'page_views' => [
