@@ -25,7 +25,7 @@ class GeoIp2 extends AbstractReader
             if (!strlen($accountId) || !strlen($licenseKey)) {
                 throw new Exception('Missing GeoIP account ID or license key');
             }
-            $client = new Client((int)$accountId, $licenseKey);
+            $client = new Client((int)$accountId, $licenseKey, ['en'], ['host' => 'geolite.info']);
             $this->record = $client->city($ip);
         }
         catch (Exception $ex) {
