@@ -4,8 +4,8 @@ namespace IgniterLabs\VisitorTracker\Models;
 
 use Exception;
 use Igniter\Flame\Database\Model;
-use Igniter\Flame\Support\Facades\File;
 use Igniter\Main\Classes\ThemeManager;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 class Settings extends Model

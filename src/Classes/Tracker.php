@@ -2,13 +2,13 @@
 
 namespace IgniterLabs\VisitorTracker\Classes;
 
-use Igniter\Flame\Support\Str;
 use IgniterLabs\VisitorTracker\Geoip\AbstractReader;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
 use IgniterLabs\VisitorTracker\Models\Settings;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 
 class Tracker
