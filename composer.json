@@ -1,6 +1,6 @@
 {
   "name": "igniterlabs/ti-ext-visitortracker",
-  "type": "tastyigniter-extension",
+  "type": "tastyigniter-package",
   "description": "Enables you track to your visitors, browsers, operating systems, page views & visits on your TastyIgniter website.",
   "license": "MIT",
   "authors": [
