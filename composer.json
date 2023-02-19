@@ -9,7 +9,6 @@
     }
   ],
   "require": {
-    "tastyigniter/flame": "v4.x-dev",
     "geoip2/geoip2": "~2.0",
     "jenssegers/agent": "~2.6"
   },
