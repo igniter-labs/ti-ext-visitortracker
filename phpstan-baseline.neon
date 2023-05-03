@@ -1,0 +1,266 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Function lang not found\\.$#"
+			count: 1
+			path: resources/views/_partials/dashboardwidgets/pageviews/pageviews.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 8
+			path: resources/views/_partials/dashboardwidgets/pageviews/pageviews.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:create\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/RepositoryManager.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/RepositoryManager.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/RepositoryManager.php
+
+		-
+			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Classes\\\\Tracker\\:\\:\\$readerManager\\.$#"
+			count: 2
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\AbstractReader referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\AbstractReader\\.$#"
+			count: 2
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\ReaderManager referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\ReaderManager\\.$#"
+			count: 2
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Function ipv4_match_mask not found\\.$#"
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Function root_url not found\\.$#"
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Function starts_with not found\\.$#"
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Call to static method setContext\\(\\) on an unknown class Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\.$#"
+			count: 1
+			path: src/Controllers/PageViews.php
+
+		-
+			message: "#^Class Igniter\\\\Admin\\\\Http\\\\Actions\\\\ListController not found\\.$#"
+			count: 1
+			path: src/Controllers/PageViews.php
+
+		-
+			message: "#^IgniterLabs\\\\VisitorTracker\\\\Controllers\\\\PageViews\\:\\:__construct\\(\\) calls parent\\:\\:__construct\\(\\) but IgniterLabs\\\\VisitorTracker\\\\Controllers\\\\PageViews does not extend any class\\.$#"
+			count: 1
+			path: src/Controllers/PageViews.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Controllers\\\\PageVisits\\:\\:asExtension\\(\\)\\.$#"
+			count: 1
+			path: src/Controllers/PageVisits.php
+
+		-
+			message: "#^Call to static method setContext\\(\\) on an unknown class Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\.$#"
+			count: 1
+			path: src/Controllers/PageVisits.php
+
+		-
+			message: "#^Class Igniter\\\\Admin\\\\Http\\\\Actions\\\\ListController not found\\.$#"
+			count: 1
+			path: src/Controllers/PageVisits.php
+
+		-
+			message: "#^IgniterLabs\\\\VisitorTracker\\\\Controllers\\\\PageVisits\\:\\:__construct\\(\\) calls parent\\:\\:__construct\\(\\) but IgniterLabs\\\\VisitorTracker\\\\Controllers\\\\PageVisits does not extend any class\\.$#"
+			count: 1
+			path: src/Controllers/PageVisits.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\DashboardWidgets\\\\PageViews\\:\\:makeDataset\\(\\)\\.$#"
+			count: 1
+			path: src/DashboardWidgets/PageViews.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\DashboardWidgets\\\\PageViews\\:\\:makePartial\\(\\)\\.$#"
+			count: 1
+			path: src/DashboardWidgets/PageViews.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\DashboardWidgets\\\\PageViews\\:\\:setProperty\\(\\)\\.$#"
+			count: 1
+			path: src/DashboardWidgets/PageViews.php
+
+		-
+			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Extension\\:\\:\\$app\\.$#"
+			count: 5
+			path: src/Extension.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:instance\\(\\)\\.$#"
+			count: 1
+			path: src/Extension.php
+
+		-
+			message: "#^Call to static method runningInAdmin\\(\\) on an unknown class Igniter\\\\Flame\\\\Igniter\\.$#"
+			count: 1
+			path: src/Extension.php
+
+		-
+			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\ReaderManager referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\ReaderManager\\.$#"
+			count: 2
+			path: src/Extension.php
+
+		-
+			message: "#^Function admin_url not found\\.$#"
+			count: 1
+			path: src/Extension.php
+
+		-
+			message: "#^Function lang not found\\.$#"
+			count: 1
+			path: src/Extension.php
+
+		-
+			message: "#^Call to method get\\(\\) on an unknown class GuzzleHttp\\\\Client\\.$#"
+			count: 1
+			path: src/GeoIp/AbstractReader.php
+
+		-
+			message: "#^Parameter \\$http of method IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\AbstractReader\\:\\:__construct\\(\\) has invalid type GuzzleHttp\\\\Client\\.$#"
+			count: 1
+			path: src/GeoIp/AbstractReader.php
+
+		-
+			message: "#^Property IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\AbstractReader\\:\\:\\$http has unknown class GuzzleHttp\\\\Client as its type\\.$#"
+			count: 1
+			path: src/GeoIp/AbstractReader.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 2
+			path: src/GeoIp/GeoIp2.php
+
+		-
+			message: "#^Method IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\GeoIp2\\:\\:getEndpoint\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: src/GeoIp/GeoIp2.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 1
+			path: src/GeoIp/Ipstack.php
+
+		-
+			message: "#^Call to method get\\(\\) on an unknown class GuzzleHttp\\\\Client\\.$#"
+			count: 1
+			path: src/GeoIp/Ipstack.php
+
+		-
+			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\GeoIp2 referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\GeoIp2\\.$#"
+			count: 1
+			path: src/GeoIp/ReaderManager.php
+
+		-
+			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\Ipstack referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\Ipstack\\.$#"
+			count: 1
+			path: src/GeoIp/ReaderManager.php
+
+		-
+			message: "#^Instantiated class GuzzleHttp\\\\Client not found\\.$#"
+			count: 2
+			path: src/GeoIp/ReaderManager.php
+
+		-
+			message: "#^Class Admin\\\\Models\\\\Customer not found\\.$#"
+			count: 1
+			path: src/Models/PageView.php
+
+		-
+			message: "#^Access to an undefined property \\$this\\(IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\)\\:\\:\\$headers\\.$#"
+			count: 2
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:\\$country_name\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:\\$customer\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:\\$geoip\\.$#"
+			count: 2
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:pluckDates\\(\\)\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:selectRaw\\(\\)\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Call to static method getCountryNameByCode\\(\\) on an unknown class Igniter\\\\System\\\\Facades\\\\Country\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Class Admin\\\\Models\\\\Customer not found\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Function lang not found\\.$#"
+			count: 5
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Function time_elapsed not found\\.$#"
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 2
+			path: src/Models/Settings.php
+
+		-
+			message: "#^Class Igniter\\\\Main\\\\Classes\\\\ThemeManager not found\\.$#"
+			count: 1
+			path: src/Models/Settings.php
+
+		-
+			message: "#^Class Igniter\\\\System\\\\Actions\\\\SettingsModel not found\\.$#"
+			count: 1
+			path: src/Models/Settings.php
