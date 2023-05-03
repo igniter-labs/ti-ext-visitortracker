@@ -27,8 +27,7 @@ class GeoIp2 extends AbstractReader
             }
             $client = new Client((int)$accountId, $licenseKey);
             $this->record = $client->city($ip);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Log::error('GeoIp2 Error -> '.$ex->getMessage());
         }
 

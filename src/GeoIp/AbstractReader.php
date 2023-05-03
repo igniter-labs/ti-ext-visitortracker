@@ -23,8 +23,6 @@ abstract class AbstractReader
     /**
      * Create a new GeoIP reader instance.
      *
-     * @param \GuzzleHttp\Client $http
-     *
      * @return void
      */
     public function __construct(HttpClient $http)

@@ -23,13 +23,13 @@ class Ipstack extends AbstractReader
             if ($response->getStatusCode() == 200) {
                 $record = json_decode($response->getBody()->getContents());
 
-                if (isset($record->error))
+                if (isset($record->error)) {
                     throw new Exception($record->error->info);
+                }
 
                 $this->record = isset($record->success) ? $record : null;
             }
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             Log::error('Ipstack Error -> '.$ex->getMessage());
         }
 
