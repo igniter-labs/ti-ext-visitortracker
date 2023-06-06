@@ -2,11 +2,13 @@
 
 namespace IgniterLabs\VisitorTracker;
 
+use Admin\DashboardWidgets\Charts;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
 use IgniterLabs\VisitorTracker\Middleware\TrackVisitor;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
+use IgniterLabs\VisitorTracker\Models\PageView;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
 use Jenssegers\Agent\AgentServiceProvider;
@@ -54,6 +56,20 @@ class Extension extends BaseExtension
         }
     }
 
+    public function boot()
+    {
+        Charts::registerDatasets(function () {
+            return [
+                'pageviews' => [
+                    'label' => 'igniterlabs.visitortracker::default.views.text_title',
+                    'color' => '#64B5F6',
+                    'model' => PageView::class,
+                    'column' => 'created_at',
+                ],
+            ];
+        });
+    }
+
     /**
      * Registers any admin permissions used by this extension.
      *
@@ -91,16 +107,6 @@ class Extension extends BaseExtension
                 'description' => 'Manage visitor tracker settings.',
                 'model' => \IgniterLabs\VisitorTracker\Models\Settings::class,
                 'permissions' => ['IgniterLabs.VisitorTracker.*'],
-            ],
-        ];
-    }
-
-    public function registerDashboardWidgets()
-    {
-        return [
-            \IgniterLabs\VisitorTracker\DashboardWidgets\PageViews::class => [
-                'label' => 'Page Views chart widget',
-                'context' => 'dashboard',
             ],
         ];
     }
