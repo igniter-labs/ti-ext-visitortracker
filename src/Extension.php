@@ -7,7 +7,7 @@ use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
-use IgniterLabs\VisitorTracker\Middleware\TrackVisitor;
+use IgniterLabs\VisitorTracker\Http\Middleware\TrackVisitor;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
@@ -77,7 +77,7 @@ class Extension extends BaseExtension
                 'priority' => 50,
                 'class' => 'pagevisits',
                 'icon' => 'fa-globe',
-                'href' => admin_url('igniterlabs/visitortracker/pagevisits'),
+                'href' => admin_url('igniterlabs/visitortracker/page_visits'),
                 'title' => lang('igniterlabs.visitortracker::default.text_title'),
                 'permission' => 'IgniterLabs.VisitorTracker.*',
             ],

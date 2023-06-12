@@ -35,7 +35,7 @@ return [
                 'views' => [
                     'label' => 'lang:igniterlabs.visitortracker::default.button_page_views',
                     'class' => 'btn btn-default',
-                    'href' => 'igniterlabs/visitortracker/pageviews',
+                    'href' => 'igniterlabs/visitortracker/page_views',
                 ],
                 'settings' => [
                     'label' => 'lang:igniterlabs.visitortracker::default.button_settings',

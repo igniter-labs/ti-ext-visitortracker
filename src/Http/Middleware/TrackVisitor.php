@@ -1,6 +1,6 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Middleware;
+namespace IgniterLabs\VisitorTracker\Http\Middleware;
 
 use Closure;
 

@@ -16,7 +16,7 @@ return [
                 'visits' => [
                     'label' => 'lang:igniterlabs.visitortracker::default.button_page_visits',
                     'class' => 'btn btn-default',
-                    'href' => 'igniterlabs/visitortracker/pagevisits',
+                    'href' => 'igniterlabs/visitortracker/page_visits',
                 ],
                 'settings' => [
                     'label' => 'lang:igniterlabs.visitortracker::default.button_settings',

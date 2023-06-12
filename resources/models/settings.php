@@ -70,6 +70,7 @@ return [
                 'type' => 'select',
                 'default' => 'maxmind',
                 'options' => [
+                    '' => 'lang:igniter::admin.text_please_select',
                     'geoip2' => 'lang:igniterlabs.visitortracker::default.text_maxmind',
                     'ipstack' => 'lang:igniterlabs.visitortracker::default.text_ipstack',
                 ],
@@ -114,7 +115,7 @@ return [
             ['exclude_ips', 'lang:igniterlabs.visitortracker::default.label_exclude_ips', 'string'],
             ['online_time_out', 'lang:igniterlabs.visitortracker::default.label_online_time_out', 'required|integer'],
             ['archive_time_out', 'lang:igniterlabs.visitortracker::default.label_archive_time_out', 'required|integer'],
-            ['geoip_reader', 'lang:igniterlabs.visitortracker::default.label_geoip_reader', 'required|in:geoip2,ipstack'],
+            ['geoip_reader', 'lang:igniterlabs.visitortracker::default.label_geoip_reader', 'nullable|in:geoip2,ipstack'],
             ['geoip_reader_ipstack_access_key', 'lang:igniterlabs.visitortracker::default.label_geoip_reader_ipstack_access_key', 'required_if:geoip_reader,ipstack|string'],
             ['geoip_reader_maxmind_account_id', 'lang:igniterlabs.visitortracker::default.label_geoip_reader_maxmind_account_id', 'required_if:geoip_reader,geoip2|string'],
             ['geoip_reader_maxmind_license_key', 'lang:igniterlabs.visitortracker::default.label_geoip_reader_maxmind_license_key', 'required_if:geoip_reader,geoip2|string'],

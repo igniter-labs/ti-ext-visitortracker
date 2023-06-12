@@ -1,6 +1,6 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Controllers;
+namespace IgniterLabs\VisitorTracker\Http\Controllers;
 
 use Igniter\Admin\Facades\AdminMenu;
 
