@@ -6,6 +6,11 @@ parameters:
 			path: resources/views/_partials/dashboardwidgets/pageviews/pageviews.php
 
 		-
+			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:create\\(\\)\\.$#"
+			count: 1
+			path: src/Classes/RepositoryManager.php
+
+		-
 			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:where\\(\\)\\.$#"
 			count: 1
 			path: src/Classes/RepositoryManager.php
@@ -39,16 +44,6 @@ parameters:
 			message: "#^Function ipv4_match_mask not found\\.$#"
 			count: 1
 			path: src/Classes/Tracker.php
-
-		-
-			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\:\\:setContext\\(\\)\\.$#"
-			count: 1
-			path: src/Controllers/PageViews.php
-
-		-
-			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\:\\:setContext\\(\\)\\.$#"
-			count: 1
-			path: src/Controllers/PageVisits.php
 
 		-
 			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:instance\\(\\)\\.$#"
@@ -86,9 +81,14 @@ parameters:
 			path: src/GeoIp/ReaderManager.php
 
 		-
-			message: "#^Class Admin\\\\Models\\\\Customer not found\\.$#"
+			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\:\\:setContext\\(\\)\\.$#"
 			count: 1
-			path: src/Models/PageView.php
+			path: src/Http/Controllers/PageViews.php
+
+		-
+			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\:\\:setContext\\(\\)\\.$#"
+			count: 1
+			path: src/Http/Controllers/PageVisits.php
 
 		-
 			message: "#^Access to an undefined property \\$this\\(IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\)\\:\\:\\$headers\\.$#"
@@ -127,11 +127,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined static method Igniter\\\\System\\\\Facades\\\\Country\\:\\:getCountryNameByCode\\(\\)\\.$#"
-			count: 1
-			path: src/Models/PageVisit.php
-
-		-
-			message: "#^Class Admin\\\\Models\\\\Customer not found\\.$#"
 			count: 1
 			path: src/Models/PageVisit.php
 
