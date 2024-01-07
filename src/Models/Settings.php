@@ -2,8 +2,8 @@
 
 namespace IgniterLabs\VisitorTracker\Models;
 
-use Exception;
 use Igniter\Flame\Database\Model;
+use Igniter\Flame\Exception\SystemException;
 use Igniter\Main\Classes\ThemeManager;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +50,7 @@ class Settings extends Model
         // Get header response
         $headers = get_headers($url);
         if (substr($headers[0], 9, 3) != '200') {
-            throw new Exception('Unable to download database. ('.substr($headers[0], 13).')');
+            throw new SystemException('Unable to download database. ('.substr($headers[0], 13).')');
         }
 
         // Download zipped database to a system temp file

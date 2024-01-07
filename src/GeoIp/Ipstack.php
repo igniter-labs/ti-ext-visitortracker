@@ -24,7 +24,7 @@ class Ipstack extends AbstractReader
                 $record = json_decode($response->getBody()->getContents());
 
                 if (isset($record->error)) {
-                    throw new Exception($record->error->info);
+                    throw new \RuntimeException($record->error->info);
                 }
 
                 $this->record = isset($record->success) ? $record : null;
@@ -48,7 +48,7 @@ class Ipstack extends AbstractReader
         $accessKey = Settings::get('geoip_reader_ipstack_access_key');
 
         if (!strlen($accessKey)) {
-            throw new Exception('Missing ipstack access key');
+            throw new \InvalidArgumentException('Missing ipstack access key');
         }
 
         return "http://api.ipstack.com/{$ip}?access_key={$accessKey}";
