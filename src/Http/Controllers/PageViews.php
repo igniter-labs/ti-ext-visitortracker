@@ -6,11 +6,11 @@ use Igniter\Admin\Facades\AdminMenu;
 
 class PageViews extends \Igniter\Admin\Classes\AdminController
 {
-    public $implement = [
+    public array $implement = [
         \Igniter\Admin\Http\Actions\ListController::class,
     ];
 
-    public $listConfig = [
+    public array $listConfig = [
         'list' => [
             'model' => \IgniterLabs\VisitorTracker\Models\PageView::class,
             'title' => 'lang:igniterlabs.visitortracker::default.views.text_title',
@@ -21,7 +21,7 @@ class PageViews extends \Igniter\Admin\Classes\AdminController
         ],
     ];
 
-    protected $requiredPermissions = 'IgniterLabs.VisitorTracker.*';
+    protected null|string|array $requiredPermissions = 'IgniterLabs.VisitorTracker.*';
 
     public function __construct()
     {

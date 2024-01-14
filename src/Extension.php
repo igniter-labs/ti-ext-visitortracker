@@ -60,7 +60,7 @@ class Extension extends BaseExtension
      *
      * @return array
      */
-    public function registerPermissions()
+    public function registerPermissions(): array
     {
         return [
             'IgniterLabs.VisitorTracker.ManageSettings' => [
@@ -70,7 +70,7 @@ class Extension extends BaseExtension
         ];
     }
 
-    public function registerNavigation()
+    public function registerNavigation(): array
     {
         return [
             'pagevisits' => [
@@ -84,7 +84,7 @@ class Extension extends BaseExtension
         ];
     }
 
-    public function registerSettings()
+    public function registerSettings(): array
     {
         return [
             'settings' => [
@@ -96,7 +96,7 @@ class Extension extends BaseExtension
         ];
     }
 
-    public function registerDashboardWidgets()
+    public function registerDashboardWidgets(): array
     {
         return [
             \IgniterLabs\VisitorTracker\DashboardWidgets\PageViews::class => [

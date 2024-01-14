@@ -16,7 +16,7 @@ class PageViews extends BaseDashboardWidget
     /**
      * @var string A unique alias to identify this widget.
      */
-    protected $defaultAlias = 'pageviews';
+    protected string $defaultAlias = 'pageviews';
 
     protected $datasetOptions = [
         'label' => null,
@@ -31,7 +31,7 @@ class PageViews extends BaseDashboardWidget
         $this->setProperty('rangeFormat', 'MMMM D, YYYY');
     }
 
-    public function defineProperties()
+    public function defineProperties(): array
     {
         return [
             'title' => [
