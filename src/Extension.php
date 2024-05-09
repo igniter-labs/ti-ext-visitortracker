@@ -63,7 +63,7 @@ class Extension extends BaseExtension
         return [
             'IgniterLabs.VisitorTracker.ManageSettings' => [
                 'description' => 'Manage visitor tracker extension settings',
-                'group' => 'advanced',
+                'group' => 'igniter::system.permissions.name',
             ],
         ];
     }
