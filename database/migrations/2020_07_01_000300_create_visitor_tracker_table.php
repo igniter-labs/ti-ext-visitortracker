@@ -40,7 +40,7 @@ return new class extends Migration
         if (Schema::hasTable('customers_online')) {
             Schema::rename('customers_online', 'igniterlabs_visitortracker_tracker');
 
-            Schema::table('igniterlabs_visitortracker_tracker', function (Blueprint $table) {
+            Schema::table('igniterlabs_visitortracker_tracker', function(Blueprint $table) {
                 $table->bigIncrements('activity_id')->change();
                 $table->string('session_id')->nullable();
                 $table->integer('geoip_id')->nullable();
@@ -54,7 +54,7 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('igniterlabs_visitortracker_tracker', function (Blueprint $table) {
+        Schema::create('igniterlabs_visitortracker_tracker', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('activity_id');
             $table->integer('customer_id');
@@ -84,7 +84,7 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('igniterlabs_visitortracker_geoip', function (Blueprint $table) {
+        Schema::create('igniterlabs_visitortracker_geoip', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->double('latitude')->nullable()->index();

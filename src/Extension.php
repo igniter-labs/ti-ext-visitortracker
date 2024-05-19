@@ -27,18 +27,18 @@ class Extension extends BaseExtension
     {
         $this->app->register(AgentServiceProvider::class);
 
-        $this->app->singleton('tracker.reader', function ($app) {
+        $this->app->singleton('tracker.reader', function($app) {
             return new ReaderManager($app);
         });
 
-        $this->app->singleton('tracker.repository.manager', function ($app) {
+        $this->app->singleton('tracker.repository.manager', function($app) {
             return new RepositoryManager(
                 new PageVisit(),
                 new GeoIp()
             );
         });
 
-        $this->app->singleton('tracker', function ($app) {
+        $this->app->singleton('tracker', function($app) {
             return new Tracker(
                 Settings::instance(),
                 $app['tracker.repository.manager'],
