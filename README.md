@@ -18,7 +18,7 @@ Tracker gathers a lot of information from your requests to identify and store:
 
 In the admin user interface you can exclude page, routes from being tracked and set how long to keep logs. 
 
-- Go to **System > Settings > Visitor Tracker Settings** to configure the extension settings
+- Go to **Manage > Settings > Visitor Tracker Settings** to configure the extension settings
 
 ### License
 [The MIT License (MIT)](https://tastyigniter.com/licence/)
