@@ -1,58 +1,58 @@
 {
-    "name": "igniterlabs/ti-ext-visitortracker",
-    "type": "tastyigniter-package",
-    "description": "Enables you track to your visitors, browsers, operating systems, page views & visits on your TastyIgniter website.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Igniter Labs Team"
-        }
-    ],
-    "require": {
-        "geoip2/geoip2": "~2.0",
-        "jenssegers/agent": "~2.6",
-        "tastyigniter/core": "dev-master"
+  "name": "igniterlabs/ti-ext-visitortracker",
+  "type": "tastyigniter-package",
+  "description": "Enables you track to your visitors, browsers, operating systems, page views & visits on your TastyIgniter website.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Igniter Labs Team"
+    }
+  ],
+  "require": {
+    "geoip2/geoip2": "~2.0",
+    "jenssegers/agent": "~2.6",
+    "tastyigniter/core": "dev-master"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.2",
+    "larastan/larastan": "^2.4.0",
+    "sampoyigi/testbench": "^1.0",
+    "pestphp/pest-plugin-laravel": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "IgniterLabs\\VisitorTracker\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "IgniterLabs\\VisitorTracker\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "tastyigniter-extension": {
+      "code": "igniterlabs.visitortracker",
+      "name": "Visitor Tracker",
+      "icon": {
+        "image": "icon.svg",
+        "backgroundColor": "#FFF"
+      },
+      "homepage": "https://tastyigniter.com/marketplace/item/igniterlabs-visitortracker"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/pest",
+    "test-coverage": "vendor/bin/pest --coverage",
+    "format": "vendor/bin/pint",
+    "static": "vendor/bin/phpstan analyse --ansi --memory-limit 1056M"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true,
+      "composer/installers": true
     },
-    "require-dev": {
-        "laravel/pint": "^1.2",
-        "nunomaduro/larastan": "^2.4.0",
-        "orchestra/testbench": "^8.5",
-        "pestphp/pest-plugin-laravel": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "IgniterLabs\\VisitorTracker\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "IgniterLabs\\VisitorTracker\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "tastyigniter-extension": {
-            "code": "igniterlabs.visitortracker",
-            "name": "Visitor Tracker",
-            "icon": {
-                "image": "icon.svg",
-                "backgroundColor": "#FFF"
-            },
-            "homepage": "https://tastyigniter.com/marketplace/item/igniterlabs-visitortracker"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint",
-        "static": "vendor/bin/phpstan analyse --ansi --memory-limit 1056M"
-    },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true,
-            "composer/installers": true
-        },
-        "sort-packages": true
-    },
-    "minimum-stability": "dev"
+    "sort-packages": true
+  },
+  "minimum-stability": "dev"
 }
