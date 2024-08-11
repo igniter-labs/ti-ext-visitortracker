@@ -33,8 +33,8 @@ class Extension extends BaseExtension
 
         $this->app->singleton('tracker.repository.manager', function($app) {
             return new RepositoryManager(
-                new PageVisit(),
-                new GeoIp()
+                new PageVisit,
+                new GeoIp
             );
         });
 

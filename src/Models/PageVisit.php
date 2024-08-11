@@ -137,7 +137,7 @@ class PageVisit extends Model
             return;
         }
 
-        $agent = new Agent();
+        $agent = new Agent;
 
         $agent->setUserAgent($userAgent = $this->user_agent);
         $agent->setHttpHeaders($headers = $this->headers);

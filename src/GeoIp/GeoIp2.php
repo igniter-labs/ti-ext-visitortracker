@@ -42,9 +42,7 @@ class GeoIp2 extends AbstractReader
      *
      * @return string
      */
-    protected function getEndpoint($ip)
-    {
-    }
+    protected function getEndpoint($ip) {}
 
     /**
      * Returns latitude from the geoip record.

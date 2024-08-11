@@ -31,7 +31,7 @@ class ReaderManager extends Manager
      */
     protected function createGeoip2Driver()
     {
-        return new GeoIp2(new HttpClient());
+        return new GeoIp2(new HttpClient);
     }
 
     /**
@@ -41,7 +41,7 @@ class ReaderManager extends Manager
      */
     protected function createIpstackDriver()
     {
-        return new Ipstack(new HttpClient());
+        return new Ipstack(new HttpClient);
     }
 
     /**
