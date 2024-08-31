@@ -123,7 +123,7 @@ class Extension extends BaseExtension
                             'color' => '#64B5F6',
                             'model' => PageView::class,
                             'column' => 'created_at',
-                        ]
+                        ],
                     ],
                 ],
             ];

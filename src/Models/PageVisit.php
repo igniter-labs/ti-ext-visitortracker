@@ -177,6 +177,7 @@ class PageVisit extends Model
     public function prunable(): Builder
     {
         $pastMonths = (int)Settings::get('archive_time_out', 1);
+
         return static::where('updated_at', '<=', now()->subMonths($pastMonths));
     }
 }
