@@ -19,8 +19,6 @@ class PageView extends Model
      */
     protected $primaryKey = 'activity_id';
 
-    protected $guarded = [];
-
     public $timestamps = true;
 
     public $relation = [

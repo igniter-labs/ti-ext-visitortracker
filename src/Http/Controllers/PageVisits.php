@@ -30,13 +30,6 @@ class PageVisits extends \Igniter\Admin\Classes\AdminController
         AdminMenu::setContext('pagevisits');
     }
 
-    public function index()
-    {
-        app('tracker')->clearOldLog();
-
-        $this->asExtension('ListController')->index();
-    }
-
     public function listExtendQuery($query)
     {
         $query->with(['geoip', 'customer'])->distinct()->groupBy('ip_address');

@@ -17,6 +17,8 @@ class Tracker
 
     protected $repositoryManager;
 
+    protected $readerManager;
+
     protected $request;
 
     protected $session;
@@ -46,8 +48,8 @@ class Tracker
         $this->agent = $agent;
         $this->readerManager = $reader;
 
-        $agent->setUserAgent($userAgent = $request->userAgent());
-        $agent->setHttpHeaders($headers = $request->header());
+        $agent->setUserAgent($request->userAgent());
+        $agent->setHttpHeaders($request->header());
 
         $reader->setDefaultDriver($config->get('geoip_reader', 'geoip2'));
     }
@@ -67,14 +69,7 @@ class Tracker
 
     public function track()
     {
-        $this->repositoryManager->clearLog();
-
         $this->repositoryManager->createLog($this->getLogData());
-    }
-
-    public function clearOldLog()
-    {
-        $this->repositoryManager->clearLog();
     }
 
     protected function isTrackable()
@@ -167,18 +162,20 @@ class Tracker
 
     protected function getGeoIpId()
     {
+        if (!$this->readerManager->getDefaultDriver()) {
+            return null;
+        }
+
         $reader = $this->readerManager->retrieve($this->request->getClientIp());
 
         if (!$reader->getRecord()) {
             return null;
         }
 
-        $geoIpId = $this->repositoryManager->createGeoIp(
+        return $this->repositoryManager->createGeoIp(
             $this->getGeoIpData($reader),
             ['latitude', 'longitude']
         );
-
-        return $geoIpId;
     }
 
     protected function getGeoIpData(AbstractReader $reader)

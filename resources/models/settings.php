@@ -50,7 +50,7 @@ return [
                 'label' => 'lang:igniterlabs.visitortracker::default.label_archive_time_out',
                 'type' => 'select',
                 'span' => 'right',
-                'default' => '3',
+                'default' => '1',
                 'options' => [
                     '0' => 'lang:igniterlabs.visitortracker::default.text_never_delete',
                     '1' => 'lang:igniterlabs.visitortracker::default.text_1_month',
@@ -101,19 +101,6 @@ return [
                     'condition' => 'value[geoip2]',
                 ],
             ],
-        ],
-        'rules' => [
-            ['status', 'lang:igniterlabs.visitortracker::default.label_status', 'required|integer'],
-            ['track_robots', 'lang:igniterlabs.visitortracker::default.label_track_robots', 'required|integer'],
-            ['exclude_routes', 'lang:igniterlabs.visitortracker::default.label_exclude_routes', 'string'],
-            ['exclude_paths', 'lang:igniterlabs.visitortracker::default.label_exclude_paths', 'string'],
-            ['exclude_ips', 'lang:igniterlabs.visitortracker::default.label_exclude_ips', 'string'],
-            ['online_time_out', 'lang:igniterlabs.visitortracker::default.label_online_time_out', 'required|integer'],
-            ['archive_time_out', 'lang:igniterlabs.visitortracker::default.label_archive_time_out', 'required|integer'],
-            ['geoip_reader', 'lang:igniterlabs.visitortracker::default.label_geoip_reader', 'nullable|in:geoip2,ipstack'],
-            ['geoip_reader_ipstack_access_key', 'lang:igniterlabs.visitortracker::default.label_geoip_reader_ipstack_access_key', 'required_if:geoip_reader,ipstack|string'],
-            ['geoip_reader_maxmind_account_id', 'lang:igniterlabs.visitortracker::default.label_geoip_reader_maxmind_account_id', 'required_if:geoip_reader,geoip2|string'],
-            ['geoip_reader_maxmind_license_key', 'lang:igniterlabs.visitortracker::default.label_geoip_reader_maxmind_license_key', 'required_if:geoip_reader,geoip2|string'],
         ],
     ],
 ];

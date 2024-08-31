@@ -5,6 +5,8 @@ namespace IgniterLabs\VisitorTracker\Models;
 use Carbon\Carbon;
 use Igniter\Flame\Database\Model;
 use Igniter\System\Facades\Country;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Prunable;
 use Jenssegers\Agent\Agent;
 
 /**
@@ -12,6 +14,8 @@ use Jenssegers\Agent\Agent;
  */
 class PageVisit extends Model
 {
+    use Prunable;
+
     /**
      * @var string The database table name
      */
@@ -21,8 +25,6 @@ class PageVisit extends Model
      * @var string The database table primary key
      */
     protected $primaryKey = 'activity_id';
-
-    protected $guarded = [];
 
     public $timestamps = true;
 
@@ -170,5 +172,11 @@ class PageVisit extends Model
     public function getOnlineDates()
     {
         return $this->pluckDates('created_at');
+    }
+
+    public function prunable(): Builder
+    {
+        $pastMonths = (int)Settings::get('archive_time_out', 1);
+        return static::where('updated_at', '<=', now()->subMonths($pastMonths));
     }
 }

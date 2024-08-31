@@ -2,6 +2,7 @@
 
 namespace IgniterLabs\VisitorTracker;
 
+use Igniter\Admin\DashboardWidgets\Charts;
 use Igniter\Flame\Igniter;
 use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
@@ -9,6 +10,7 @@ use IgniterLabs\VisitorTracker\Classes\Tracker;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
 use IgniterLabs\VisitorTracker\Http\Middleware\TrackVisitor;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
+use IgniterLabs\VisitorTracker\Models\PageView;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
 use Jenssegers\Agent\AgentServiceProvider;
@@ -25,6 +27,8 @@ class Extension extends BaseExtension
      */
     public function register()
     {
+        parent::register();
+
         $this->app->register(AgentServiceProvider::class);
 
         $this->app->singleton('tracker.reader', function($app) {
@@ -53,6 +57,18 @@ class Extension extends BaseExtension
         if (!Igniter::runningInAdmin()) {
             $this->app[\Illuminate\Contracts\Http\Kernel::class]->pushMiddleware(TrackVisitor::class);
         }
+
+    }
+
+    public function boot()
+    {
+        $this->app->booted(function() {
+            if ((int)Settings::get('archive_time_out')) {
+                Igniter::prunableModel(PageVisit::class);
+            }
+
+            $this->registerPageViewsDatasetOnChartsWidget();
+        });
     }
 
     /**
@@ -89,18 +105,28 @@ class Extension extends BaseExtension
                 'label' => 'Visitor Tracker Settings',
                 'description' => 'Manage visitor tracker settings.',
                 'model' => \IgniterLabs\VisitorTracker\Models\Settings::class,
+                'request' => \IgniterLabs\VisitorTracker\Http\Requests\SettingsRequest::class,
                 'permissions' => ['IgniterLabs.VisitorTracker.*'],
             ],
         ];
     }
 
-    public function registerDashboardWidgets(): array
+    public function registerPageViewsDatasetOnChartsWidget()
     {
-        return [
-            \IgniterLabs\VisitorTracker\DashboardWidgets\PageViews::class => [
-                'label' => 'Page Views chart widget',
-                'context' => 'dashboard',
-            ],
-        ];
+        Charts::registerDatasets(function() {
+            return [
+                'pageviews' => [
+                    'label' => 'igniterlabs.visitortracker::default.views.text_title',
+                    'sets' => [
+                        [
+                            'label' => 'igniterlabs.visitortracker::default.views.text_title',
+                            'color' => '#64B5F6',
+                            'model' => PageView::class,
+                            'column' => 'created_at',
+                        ]
+                    ],
+                ],
+            ];
+        });
     }
 }
