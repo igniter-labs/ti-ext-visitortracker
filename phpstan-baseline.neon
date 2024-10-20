@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Variable \\$this might not be defined\\.$#"
-			count: 8
-			path: resources/views/_partials/dashboardwidgets/pageviews/pageviews.php
-
-		-
 			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:create\\(\\)\\.$#"
 			count: 1
 			path: src/Classes/RepositoryManager.php
@@ -19,11 +14,6 @@ parameters:
 			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
 			count: 1
 			path: src/Classes/RepositoryManager.php
-
-		-
-			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Classes\\\\Tracker\\:\\:\\$readerManager\\.$#"
-			count: 2
-			path: src/Classes/Tracker.php
 
 		-
 			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
@@ -44,6 +34,11 @@ parameters:
 			message: "#^Function ipv4_match_mask not found\\.$#"
 			count: 1
 			path: src/Classes/Tracker.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 1
+			path: src/Extension.php
 
 		-
 			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:instance\\(\\)\\.$#"
@@ -126,8 +121,13 @@ parameters:
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:where\\(\\)\\.$#"
 			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			count: 2
 			path: src/Models/PageVisit.php
 
 		-
