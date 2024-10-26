@@ -149,7 +149,7 @@ class Tracker
     {
         $referer = $this->request->header('referer', $this->request->header('utm_source', ''));
 
-        if (starts_with($referer, root_url())) {
+        if (starts_with($referer, page_url('home'))) {
             $referer = null;
         }
 
