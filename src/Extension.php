@@ -38,7 +38,7 @@ class Extension extends BaseExtension
         $this->app->singleton('tracker.repository.manager', function($app) {
             return new RepositoryManager(
                 new PageVisit,
-                new GeoIp
+                new GeoIp,
             );
         });
 
@@ -50,7 +50,7 @@ class Extension extends BaseExtension
                 $app['session.store'],
                 $app['router'],
                 $app['agent'],
-                $app['tracker.reader']
+                $app['tracker.reader'],
             );
         });
 
@@ -63,7 +63,7 @@ class Extension extends BaseExtension
     public function boot()
     {
         $this->app->booted(function() {
-            if ((int)Settings::get('archive_time_out')) {
+            if (Igniter::hasDatabase() && (int)Settings::get('archive_time_out')) {
                 Igniter::prunableModel(PageVisit::class);
             }
 
