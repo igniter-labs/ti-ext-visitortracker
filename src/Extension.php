@@ -3,7 +3,7 @@
 namespace IgniterLabs\VisitorTracker;
 
 use Igniter\Admin\DashboardWidgets\Charts;
-use Igniter\Flame\Igniter;
+use Igniter\Flame\Support\Facades\Igniter;
 use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
