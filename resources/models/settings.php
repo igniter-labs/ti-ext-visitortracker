@@ -65,7 +65,6 @@ return [
                 'type' => 'select',
                 'default' => 'maxmind',
                 'options' => [
-                    '' => 'lang:igniter::admin.text_please_select',
                     'geoip2' => 'lang:igniterlabs.visitortracker::default.text_maxmind',
                     'ipstack' => 'lang:igniterlabs.visitortracker::default.text_ipstack',
                 ],
