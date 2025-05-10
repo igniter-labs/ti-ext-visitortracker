@@ -1,18 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Http\Controllers;
 
+use Igniter\Admin\Classes\AdminController;
 use Igniter\Admin\Facades\AdminMenu;
+use Igniter\Admin\Http\Actions\ListController;
+use IgniterLabs\VisitorTracker\Models\PageView;
 
-class PageViews extends \Igniter\Admin\Classes\AdminController
+class PageViews extends AdminController
 {
     public array $implement = [
-        \Igniter\Admin\Http\Actions\ListController::class,
+        ListController::class,
     ];
 
     public array $listConfig = [
         'list' => [
-            'model' => \IgniterLabs\VisitorTracker\Models\PageView::class,
+            'model' => PageView::class,
             'title' => 'lang:igniterlabs.visitortracker::default.views.text_title',
             'emptyMessage' => 'lang:igniterlabs.visitortracker::default.views.text_empty',
             'defaultSort' => ['page_views', 'DESC'],
@@ -30,7 +35,7 @@ class PageViews extends \Igniter\Admin\Classes\AdminController
         AdminMenu::setContext('pagevisits');
     }
 
-    public function listExtendQuery($query)
+    public function listExtendQuery($query): void
     {
         $query->with(['geoip', 'customer'])->groupBy('request_uri');
     }
