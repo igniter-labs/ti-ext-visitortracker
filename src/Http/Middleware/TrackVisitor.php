@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Http\Middleware;
 
 use Closure;

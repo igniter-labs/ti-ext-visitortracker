@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Carbon\Carbon;
 use Igniter\Flame\Database\Model;
 use Igniter\System\Facades\Country;
+use Igniter\User\Models\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Prunable;
 use Jenssegers\Agent\Agent;
@@ -30,8 +33,8 @@ class PageVisit extends Model
 
     public $relation = [
         'belongsTo' => [
-            'geoip' => [\IgniterLabs\VisitorTracker\Models\GeoIp::class],
-            'customer' => [\Igniter\User\Models\Customer::class, 'foreignKey' => 'customer_id'],
+            'geoip' => [GeoIp::class],
+            'customer' => [Customer::class, 'foreignKey' => 'customer_id'],
         ],
     ];
 
@@ -53,12 +56,12 @@ class PageVisit extends Model
     // Accessors & Mutators
     //
 
-    public function getAccessTypeAttribute($value)
+    public function getAccessTypeAttribute($value): string
     {
-        return ucwords($value);
+        return ucwords((string) $value);
     }
 
-    public function getDateAddedAttribute($value)
+    public function getDateAddedAttribute($value): string
     {
         return time_elapsed($value);
     }
@@ -72,7 +75,7 @@ class PageVisit extends Model
         return Country::getCountryNameByCode($this->geoip->country_iso_code_2);
     }
 
-    public function getCountryCityAttribute()
+    public function getCountryCityAttribute(): string
     {
         return $this->country_name.' - '.($this->geoip ? $this->geoip->city : null);
     }
@@ -86,7 +89,7 @@ class PageVisit extends Model
         return $this->customer->full_name;
     }
 
-    protected function getPlatformAttribute()
+    protected function getPlatformAttribute(): ?string
     {
         if (!$this->agentClass) {
             return null;
@@ -113,6 +116,8 @@ class PageVisit extends Model
             return lang('igniterlabs.visitortracker::default.text_computer')
                 .' ['.$platform.']';
         }
+
+        return null;
     }
 
     //

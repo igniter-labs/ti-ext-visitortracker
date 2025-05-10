@@ -1,141 +1,139 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:create\\(\\)\\.$#"
+			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:create\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Classes/RepositoryManager.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:where\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/Classes/RepositoryManager.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/Classes/RepositoryManager.php
 
 		-
-			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager\:\:retrieve\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Classes/Tracker.php
 
 		-
-			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\AbstractReader referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\AbstractReader\\.$#"
+			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Class IgniterLabs\\VisitorTracker\\GeoIp\\AbstractReader referenced with incorrect case\: IgniterLabs\\VisitorTracker\\Geoip\\AbstractReader\.$#'
+			identifier: class.nameCase
 			count: 2
 			path: src/Classes/Tracker.php
 
 		-
-			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\ReaderManager referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\ReaderManager\\.$#"
-			count: 2
+			message: '#^Class IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager referenced with incorrect case\: IgniterLabs\\VisitorTracker\\Geoip\\ReaderManager\.$#'
+			identifier: class.nameCase
+			count: 3
 			path: src/Classes/Tracker.php
 
 		-
-			message: "#^Function ipv4_match_mask not found\\.$#"
+			message: '#^Function ipv4_match_mask not found\.$#'
+			identifier: function.notFound
 			count: 1
 			path: src/Classes/Tracker.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/Extension.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:instance\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:instance\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/Extension.php
 
 		-
-			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\ReaderManager referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\ReaderManager\\.$#"
-			count: 2
+			message: '#^Class IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager referenced with incorrect case\: IgniterLabs\\VisitorTracker\\Geoip\\ReaderManager\.$#'
+			identifier: class.nameCase
+			count: 3
 			path: src/Extension.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 2
 			path: src/GeoIp/GeoIp2.php
 
 		-
-			message: "#^Method IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\GeoIp2\\:\\:getEndpoint\\(\\) should return string but return statement is missing\\.$#"
-			count: 1
-			path: src/GeoIp/GeoIp2.php
-
-		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/GeoIp/Ipstack.php
 
 		-
-			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\GeoIp2 referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\GeoIp2\\.$#"
-			count: 1
-			path: src/GeoIp/ReaderManager.php
-
-		-
-			message: "#^Class IgniterLabs\\\\VisitorTracker\\\\GeoIp\\\\Ipstack referenced with incorrect case\\: IgniterLabs\\\\VisitorTracker\\\\Geoip\\\\Ipstack\\.$#"
-			count: 1
-			path: src/GeoIp/ReaderManager.php
-
-		-
-			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\:\\:setContext\\(\\)\\.$#"
-			count: 1
-			path: src/Http/Controllers/PageViews.php
-
-		-
-			message: "#^Call to an undefined static method Igniter\\\\Admin\\\\Facades\\\\AdminMenu\\:\\:setContext\\(\\)\\.$#"
-			count: 1
-			path: src/Http/Controllers/PageVisits.php
-
-		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:isConfigured\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:isConfigured\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/Http/Middleware/TrackVisitor.php
 
 		-
-			message: "#^Access to an undefined property \\$this\\(IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\)\\:\\:\\$headers\\.$#"
+			message: '#^Access to an undefined property \$this\(IgniterLabs\\VisitorTracker\\Models\\PageVisit\)\:\:\$headers\.$#'
+			identifier: property.notFound
 			count: 2
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:\\$country_name\\.$#"
+			message: '#^Access to an undefined property IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:\$country_name\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:\\$customer\\.$#"
+			message: '#^Access to an undefined property IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:\$customer\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Access to an undefined property IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:\\$geoip\\.$#"
+			message: '#^Access to an undefined property IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:\$geoip\.$#'
+			identifier: property.notFound
 			count: 2
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:pluckDates\\(\\)\\.$#"
+			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:pluckDates\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:selectRaw\\(\\)\\.$#"
+			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:selectRaw\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\PageVisit\\:\\:where\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Call to an undefined static method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 2
 			path: src/Models/PageVisit.php
 
 		-
-			message: "#^Call to an undefined static method Igniter\\\\System\\\\Facades\\\\Country\\:\\:getCountryNameByCode\\(\\)\\.$#"
-			count: 1
-			path: src/Models/PageVisit.php
-
-		-
-			message: "#^Call to an undefined method IgniterLabs\\\\VisitorTracker\\\\Models\\\\Settings\\:\\:get\\(\\)\\.$#"
+			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
+			identifier: method.notFound
 			count: 2
 			path: src/Models/Settings.php

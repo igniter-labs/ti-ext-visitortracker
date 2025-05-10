@@ -1,29 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\GeoIp;
 
 use Exception;
 use GeoIp2\WebService\Client;
 use IgniterLabs\VisitorTracker\Models\Settings;
 use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
+use Override;
 
 class GeoIp2 extends AbstractReader
 {
     /**
      * Fetch data from a remote geoapi service.
      *
-     * @param string $ip
-     *
      * @return $this
      */
-    public function retrieve($ip)
+    #[Override]
+    public function retrieve(string $ip): static
     {
         $accountId = Settings::get('geoip_reader_maxmind_account_id');
         $licenseKey = Settings::get('geoip_reader_maxmind_license_key');
 
         try {
             if (!strlen($accountId) || !strlen($licenseKey)) {
-                throw new \InvalidArgumentException('Missing GeoIP account ID or license key');
+                throw new InvalidArgumentException('Missing GeoIP account ID or license key');
             }
 
             $client = new Client((int)$accountId, $licenseKey);
@@ -39,10 +42,11 @@ class GeoIp2 extends AbstractReader
      * Returns an endpoint to fetch the record from.
      *
      * @param string $ip IP address to fetch geoip record for
-     *
-     * @return string
      */
-    protected function getEndpoint($ip) {}
+    protected function getEndpoint(string $ip): string
+    {
+        return '';
+    }
 
     /**
      * Returns latitude from the geoip record.

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\GeoIp;
 
 use GuzzleHttp\Client as HttpClient;
@@ -26,20 +28,16 @@ class ReaderManager extends Manager
 
     /**
      * Create an instance of the ipstack driver.
-     *
-     * @return \IgniterLabs\VisitorTracker\Geoip\GeoIp2
      */
-    protected function createGeoip2Driver()
+    protected function createGeoip2Driver(): GeoIp2
     {
         return new GeoIp2(new HttpClient);
     }
 
     /**
      * Create an instance of the ipstack driver.
-     *
-     * @return \IgniterLabs\VisitorTracker\Geoip\Ipstack
      */
-    protected function createIpstackDriver()
+    protected function createIpstackDriver(): Ipstack
     {
         return new Ipstack(new HttpClient);
     }
@@ -48,10 +46,8 @@ class ReaderManager extends Manager
      * Set the default reader driver name.
      *
      * @param string $reader
-     *
-     * @return void
      */
-    public function setDefaultDriver($reader)
+    public function setDefaultDriver($reader): void
     {
         $this->defaultReader = $reader;
     }

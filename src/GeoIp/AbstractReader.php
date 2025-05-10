@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\GeoIp;
 
 use GuzzleHttp\Client as HttpClient;
 
 abstract class AbstractReader
 {
-    /**
-     * The HTTP client instance.
-     *
-     * @var \GuzzleHttp\Client
-     */
-    protected $http;
-
     /**
      * Holds recorrd fetched from a remote geoapi service.
      *
@@ -25,19 +20,19 @@ abstract class AbstractReader
      *
      * @return void
      */
-    public function __construct(HttpClient $http)
-    {
-        $this->http = $http;
-    }
+    public function __construct(
+        /**
+         * The HTTP client instance.
+         */
+        protected HttpClient $http,
+    ) {}
 
     /**
      * Fetch data from a remote geoapi service.
      *
-     * @param string $ip
-     *
      * @return $this
      */
-    public function retrieve($ip)
+    public function retrieve(string $ip)
     {
         $response = $this->http->get($this->getEndpoint($ip));
         if ($response->getStatusCode() == 200) {
@@ -56,10 +51,8 @@ abstract class AbstractReader
      * Returns an endpoint to fetch the record from.
      *
      * @param string $ip IP address to fetch geoip record for
-     *
-     * @return string
      */
-    abstract protected function getEndpoint($ip);
+    abstract protected function getEndpoint(string $ip): string;
 
     /**
      * Returns latitude from the geoip record.

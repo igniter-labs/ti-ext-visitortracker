@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Http\Requests;
 
 use Igniter\System\Classes\FormRequest;
+use Override;
 
 class SettingsRequest extends FormRequest
 {
+    #[Override]
     public function attributes(): array
     {
         return [

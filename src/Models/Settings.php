@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Igniter\Flame\Database\Model;
 use Igniter\Flame\Exception\SystemException;
 use Igniter\Main\Classes\ThemeManager;
+use Igniter\System\Actions\SettingsModel;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 class Settings extends Model
 {
-    public array $implement = [\Igniter\System\Actions\SettingsModel::class];
+    public array $implement = [SettingsModel::class];
 
     // A unique code
     public string $settingsCode = 'igniterlabs_visitortracker_settings';
@@ -41,7 +44,7 @@ class Settings extends Model
         return $pages;
     }
 
-    public function updateMaxMindDatabase()
+    public function updateMaxMindDatabase(): bool
     {
         // Get settings
         $url = $this->getUpdateUrl();
@@ -49,8 +52,8 @@ class Settings extends Model
 
         // Get header response
         $headers = get_headers($url);
-        if (substr($headers[0], 9, 3) != '200') {
-            throw new SystemException('Unable to download database. ('.substr($headers[0], 13).')');
+        if (substr((string) $headers[0], 9, 3) !== '200') {
+            throw new SystemException('Unable to download database. ('.substr((string) $headers[0], 13).')');
         }
 
         // Download zipped database to a system temp file
@@ -76,7 +79,7 @@ class Settings extends Model
         return $this->get('database_path', storage_path('app/geoip.mmdb'));
     }
 
-    public function ensureDatabaseExists()
+    public function ensureDatabaseExists(): static
     {
         if (!File::exists($this->getDatabasePath())) {
             $this->updateMaxMindDatabase();

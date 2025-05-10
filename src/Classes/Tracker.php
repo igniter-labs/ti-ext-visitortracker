@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Classes;
 
 use IgniterLabs\VisitorTracker\Geoip\AbstractReader;
@@ -13,48 +15,26 @@ use Jenssegers\Agent\Agent;
 
 class Tracker
 {
-    protected $config;
-
-    protected $repositoryManager;
-
-    protected $readerManager;
-
-    protected $request;
-
-    protected $session;
-
-    protected $route;
-
-    protected $agent;
-
     protected $reader;
 
     protected $booted;
 
     public function __construct(
-        Settings $config,
-        RepositoryManager $repositoryManager,
-        Request $request,
-        Session $session,
-        Router $route,
-        Agent $agent,
-        ReaderManager $reader
+        protected Settings $config,
+        protected RepositoryManager $repositoryManager,
+        protected Request $request,
+        protected Session $session,
+        protected Router $route,
+        protected Agent $agent,
+        protected ReaderManager $readerManager
     ) {
-        $this->config = $config;
-        $this->repositoryManager = $repositoryManager;
-        $this->request = $request;
-        $this->session = $session;
-        $this->route = $route;
-        $this->agent = $agent;
-        $this->readerManager = $reader;
+        $this->agent->setUserAgent($this->request->userAgent());
+        $this->agent->setHttpHeaders($this->request->header());
 
-        $agent->setUserAgent($request->userAgent());
-        $agent->setHttpHeaders($request->header());
-
-        $reader->setDefaultDriver($config->get('geoip_reader', 'geoip2'));
+        $this->readerManager->setDefaultDriver($this->config->get('geoip_reader', 'geoip2'));
     }
 
-    public function boot()
+    public function boot(): void
     {
         if ($this->booted) {
             return;
@@ -67,12 +47,12 @@ class Tracker
         $this->booted = true;
     }
 
-    public function track()
+    public function track(): void
     {
         $this->repositoryManager->createLog($this->getLogData());
     }
 
-    protected function isTrackable()
+    protected function isTrackable(): bool
     {
         return ((bool)$this->config->get('status', true))
             && $this->isTrackableIp()
@@ -81,7 +61,7 @@ class Tracker
             && $this->pathIsTrackable();
     }
 
-    protected function isTrackableIp()
+    protected function isTrackableIp(): bool
     {
         $ipAddress = $this->request->getClientIp();
         $excludeIps = $this->config->get('exclude_ips');
@@ -115,7 +95,7 @@ class Tracker
             || !$this->matchesPattern($currentRouteName, $excludeRoutes);
     }
 
-    protected function pathIsTrackable()
+    protected function pathIsTrackable(): bool
     {
         $currentPath = $this->request->path();
         $excludePaths = $this->explodeString($this->config->get('exclude_paths'));
@@ -125,7 +105,7 @@ class Tracker
             || !$this->matchesPattern($currentPath, $excludePaths);
     }
 
-    protected function getLogData()
+    protected function getLogData(): array
     {
         return [
             'session_id' => $this->session->getId(),
@@ -178,7 +158,7 @@ class Tracker
         );
     }
 
-    protected function getGeoIpData(AbstractReader $reader)
+    protected function getGeoIpData(AbstractReader $reader): array
     {
         return [
             'latitude' => $reader->latitude(),
@@ -194,7 +174,7 @@ class Tracker
     // IP Range
     //
 
-    protected function ipNotInRanges($ip, $excludeRange)
+    protected function ipNotInRanges($ip, $excludeRange): bool
     {
         if (!is_array($excludeRange)) {
             $excludeRange = [$excludeRange];
@@ -233,16 +213,16 @@ class Tracker
 
     protected function ipRangeIsWildCard($range)
     {
-        if (!str_contains($range, '-') && str_contains($range, '*')) {
+        if (!str_contains((string) $range, '-') && str_contains((string) $range, '*')) {
             return str_replace('*', '0', $range).'-'.str_replace('*', '255', $range);
         }
 
         return null;
     }
 
-    protected function ipRangeIsDashed($range)
+    protected function ipRangeIsDashed($range): ?array
     {
-        if (count($twoIps = explode('-', $range)) == 2) {
+        if (count($twoIps = explode('-', (string) $range)) == 2) {
             return $twoIps;
         }
 
@@ -253,12 +233,12 @@ class Tracker
     // Helpers
     //
 
-    protected function explodeString($string)
+    protected function explodeString($string): array
     {
         return array_map('trim', explode(',', str_replace("\n", ',', $string)));
     }
 
-    protected function matchesPattern($what, $patterns)
+    protected function matchesPattern($what, $patterns): bool
     {
         foreach ($patterns as $pattern) {
             if (Str::is($pattern, $what)) {

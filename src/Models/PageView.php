@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Igniter\Flame\Database\Model;
+use Igniter\User\Models\Customer;
 
 /**
  * PageVisit Model Class.
@@ -23,8 +26,8 @@ class PageView extends Model
 
     public $relation = [
         'belongsTo' => [
-            'geoip' => [\IgniterLabs\VisitorTracker\Models\GeoIp::class],
-            'customer' => [\Igniter\User\Models\Customer::class, 'foreignKey' => 'customer_id'],
+            'geoip' => [GeoIp::class],
+            'customer' => [Customer::class, 'foreignKey' => 'customer_id'],
         ],
     ];
 }

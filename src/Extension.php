@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker;
 
 use Igniter\Admin\DashboardWidgets\Charts;
@@ -9,11 +11,14 @@ use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
 use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
 use IgniterLabs\VisitorTracker\Http\Middleware\TrackVisitor;
+use IgniterLabs\VisitorTracker\Http\Requests\SettingsRequest;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
 use IgniterLabs\VisitorTracker\Models\PageView;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
+use Illuminate\Contracts\Http\Kernel;
 use Jenssegers\Agent\AgentServiceProvider;
+use Override;
 
 /**
  * VisitorTracker Extension Information File.
@@ -22,47 +27,41 @@ class Extension extends BaseExtension
 {
     /**
      * Register method, called when the extension is first registered.
-     *
-     * @return void
      */
-    public function register()
+    #[Override]
+    public function register(): void
     {
         parent::register();
 
         $this->app->register(AgentServiceProvider::class);
 
-        $this->app->singleton('tracker.reader', function($app) {
-            return new ReaderManager($app);
-        });
+        $this->app->singleton('tracker.reader', fn($app): ReaderManager => new ReaderManager($app));
 
-        $this->app->singleton('tracker.repository.manager', function($app) {
-            return new RepositoryManager(
-                new PageVisit,
-                new GeoIp,
-            );
-        });
+        $this->app->singleton('tracker.repository.manager', fn($app): RepositoryManager => new RepositoryManager(
+            new PageVisit,
+            new GeoIp,
+        ));
 
-        $this->app->singleton('tracker', function($app) {
-            return new Tracker(
-                Settings::instance(),
-                $app['tracker.repository.manager'],
-                $app['request'],
-                $app['session.store'],
-                $app['router'],
-                $app['agent'],
-                $app['tracker.reader'],
-            );
-        });
+        $this->app->singleton('tracker', fn($app): Tracker => new Tracker(
+            Settings::instance(),
+            $app['tracker.repository.manager'],
+            $app['request'],
+            $app['session.store'],
+            $app['router'],
+            $app['agent'],
+            $app['tracker.reader'],
+        ));
 
         if (!Igniter::runningInAdmin()) {
-            $this->app[\Illuminate\Contracts\Http\Kernel::class]->pushMiddleware(TrackVisitor::class);
+            $this->app[Kernel::class]->pushMiddleware(TrackVisitor::class);
         }
 
     }
 
-    public function boot()
+    #[Override]
+    public function boot(): void
     {
-        $this->app->booted(function() {
+        $this->app->booted(function(): void {
             if (Igniter::hasDatabase() && (int)Settings::get('archive_time_out')) {
                 Igniter::prunableModel(PageVisit::class);
             }
@@ -74,6 +73,7 @@ class Extension extends BaseExtension
     /**
      * Registers any admin permissions used by this extension.
      */
+    #[Override]
     public function registerPermissions(): array
     {
         return [
@@ -84,6 +84,7 @@ class Extension extends BaseExtension
         ];
     }
 
+    #[Override]
     public function registerNavigation(): array
     {
         return [
@@ -98,35 +99,34 @@ class Extension extends BaseExtension
         ];
     }
 
+    #[Override]
     public function registerSettings(): array
     {
         return [
             'settings' => [
                 'label' => 'Visitor Tracker Settings',
                 'description' => 'Manage visitor tracker settings.',
-                'model' => \IgniterLabs\VisitorTracker\Models\Settings::class,
-                'request' => \IgniterLabs\VisitorTracker\Http\Requests\SettingsRequest::class,
+                'model' => Settings::class,
+                'request' => SettingsRequest::class,
                 'permissions' => ['IgniterLabs.VisitorTracker.*'],
             ],
         ];
     }
 
-    public function registerPageViewsDatasetOnChartsWidget()
+    public function registerPageViewsDatasetOnChartsWidget(): void
     {
-        Charts::registerDatasets(function() {
-            return [
-                'pageviews' => [
-                    'label' => 'igniterlabs.visitortracker::default.views.text_title',
-                    'sets' => [
-                        [
-                            'label' => 'igniterlabs.visitortracker::default.views.text_title',
-                            'color' => '#64B5F6',
-                            'model' => PageView::class,
-                            'column' => 'created_at',
-                        ],
+        Charts::registerDatasets(fn(): array => [
+            'pageviews' => [
+                'label' => 'igniterlabs.visitortracker::default.views.text_title',
+                'sets' => [
+                    [
+                        'label' => 'igniterlabs.visitortracker::default.views.text_title',
+                        'color' => '#64B5F6',
+                        'model' => PageView::class,
+                        'column' => 'created_at',
                     ],
                 ],
-            ];
-        });
+            ],
+        ]);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IgniterLabs\VisitorTracker\Classes;
 
 use Carbon\Carbon;
@@ -9,21 +11,7 @@ use IgniterLabs\VisitorTracker\Models\Settings;
 
 class RepositoryManager
 {
-    /**
-     * @var \IgniterLabs\VisitorTracker\Models\PageVisit
-     */
-    protected $trackerModel;
-
-    /**
-     * @var \IgniterLabs\VisitorTracker\Models\GeoIp
-     */
-    protected $geoIpModel;
-
-    public function __construct(TrackerModel $trackerModel, GeoIp $geoIpModel)
-    {
-        $this->trackerModel = $trackerModel;
-        $this->geoIpModel = $geoIpModel;
-    }
+    public function __construct(protected TrackerModel $trackerModel, protected GeoIp $geoIpModel) {}
 
     public function createLog($log)
     {
@@ -37,7 +25,7 @@ class RepositoryManager
         return $geoip ? $geoip->id : null;
     }
 
-    public function findOrCreate($model, $attributes, $keys = null)
+    public function findOrCreate($model, array $attributes, $keys = null)
     {
         $query = $model->newQuery();
 
@@ -58,9 +46,9 @@ class RepositoryManager
         return $foundModel;
     }
 
-    public function clearLog()
+    public function clearLog(): void
     {
-        if ($pastMonths = (int)Settings::get('archive_time_out', 3)) {
+        if (($pastMonths = (int)Settings::get('archive_time_out', 3)) !== 0) {
             TrackerModel::where('updated_at', '<=', Carbon::now()->subMonths($pastMonths))->delete();
         }
     }
