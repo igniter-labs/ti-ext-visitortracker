@@ -88,7 +88,7 @@ class Tracker
         }
 
         $currentRouteName = $this->route->currentRouteName();
-        $excludeRoutes = $this->explodeString($this->config->get('exclude_routes'));
+        $excludeRoutes = $this->explodeString($this->config->get('exclude_routes') ?? '');
 
         return !$excludeRoutes
             || !$currentRouteName
@@ -98,7 +98,7 @@ class Tracker
     protected function pathIsTrackable(): bool
     {
         $currentPath = $this->request->path();
-        $excludePaths = $this->explodeString($this->config->get('exclude_paths'));
+        $excludePaths = $this->explodeString($this->config->get('exclude_paths') ?? '');
 
         return !$excludePaths
             || empty($currentPath)
@@ -233,7 +233,7 @@ class Tracker
     // Helpers
     //
 
-    protected function explodeString($string): array
+    protected function explodeString(string $string): array
     {
         return array_map('trim', explode(',', str_replace("\n", ',', $string)));
     }
