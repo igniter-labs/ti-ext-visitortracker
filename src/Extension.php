@@ -9,7 +9,7 @@ use Igniter\Flame\Support\Facades\Igniter;
 use Igniter\System\Classes\BaseExtension;
 use IgniterLabs\VisitorTracker\Classes\RepositoryManager;
 use IgniterLabs\VisitorTracker\Classes\Tracker;
-use IgniterLabs\VisitorTracker\Geoip\ReaderManager;
+use IgniterLabs\VisitorTracker\GeoIp\ReaderManager;
 use IgniterLabs\VisitorTracker\Http\Middleware\TrackVisitor;
 use IgniterLabs\VisitorTracker\Http\Requests\SettingsRequest;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
