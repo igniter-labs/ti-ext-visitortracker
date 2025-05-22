@@ -15,9 +15,15 @@ use Jenssegers\Agent\Agent;
 
 class Tracker
 {
-    protected $reader;
+    protected const array EXCLUDE_PATHS = [
+        'horizon/*',
+        '_debugbar/*',
+        'broadcasting/auth',
+        '_assets/*',
+        'livewire/*',
+    ];
 
-    protected $booted;
+    protected bool $booted = false;
 
     public function __construct(
         protected Settings $config,
@@ -26,7 +32,7 @@ class Tracker
         protected Session $session,
         protected Router $route,
         protected Agent $agent,
-        protected ReaderManager $readerManager
+        protected ReaderManager $readerManager,
     ) {
         $this->agent->setUserAgent($this->request->userAgent());
         $this->agent->setHttpHeaders($this->request->header());
@@ -99,6 +105,7 @@ class Tracker
     {
         $currentPath = $this->request->path();
         $excludePaths = $this->explodeString($this->config->get('exclude_paths') ?? '');
+        $excludePaths = array_merge(self::EXCLUDE_PATHS, $excludePaths);
 
         return !$excludePaths
             || empty($currentPath)
@@ -154,7 +161,7 @@ class Tracker
 
         return $this->repositoryManager->createGeoIp(
             $this->getGeoIpData($reader),
-            ['latitude', 'longitude']
+            ['latitude', 'longitude'],
         );
     }
 
@@ -208,12 +215,12 @@ class Tracker
         //   192.168.17.1/16 or
         //   127.0.0.1/255.255.255.255 or
         //   10.0.0.1
-        return ipv4_match_mask($ip, $range);
+        return $this->ipv4MatchMask($ip, $range);
     }
 
     protected function ipRangeIsWildCard($range)
     {
-        if (!str_contains((string) $range, '-') && str_contains((string) $range, '*')) {
+        if (!str_contains((string)$range, '-') && str_contains((string)$range, '*')) {
             return str_replace('*', '0', $range).'-'.str_replace('*', '255', $range);
         }
 
@@ -222,11 +229,28 @@ class Tracker
 
     protected function ipRangeIsDashed($range): ?array
     {
-        if (count($twoIps = explode('-', (string) $range)) == 2) {
+        if (count($twoIps = explode('-', (string)$range)) == 2) {
             return $twoIps;
         }
 
         return null;
+    }
+
+    protected function ipv4MatchMask(string $ip, string $network): bool
+    {
+        $ipv4_arr = explode('/', $network);
+
+        if (count($ipv4_arr) == 1) {
+            $ipv4_arr[1] = '255.255.255.255';
+        }
+
+        $network_long = ip2long($ipv4_arr[0]);
+
+        $x = ip2long($ipv4_arr[1]);
+        $mask = long2ip($x) == $ipv4_arr[1] ? $x : 0xFFFFFFFF << (32 - $ipv4_arr[1]);
+        $ipv4_long = ip2long($ip);
+
+        return ($ipv4_long & $mask) == ($network_long & $mask);
     }
 
     //
