@@ -1,3 +1,9 @@
+---
+title: "Visitor Tracker"
+section: "extensions"
+sortOrder: 999
+---
+
 Enables you to track your visitors, browsers, operating systems, page views & visits on your TastyIgniter website. See how many users are online on your TastyIgniter website with detailed statistics.
 
 > After extension installation, enable GeoIP by clicking the 'Update GeoIP Database' button on the Page Visits page.
