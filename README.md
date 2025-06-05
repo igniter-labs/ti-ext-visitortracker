@@ -1,24 +1,51 @@
-Enables you to track your visitors, browsers, operating systems, page views & visits on your TastyIgniter website. See how many users are online on your TastyIgniter website with detailed statistics.
+<p align="center">
+    <a href="https://github.com/igniter-labs/ti-ext-visitortracker/actions"><img src="https://github.com/igniter-labs/ti-ext-visitortracker/actions/workflows/pipeline.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://packagist.org/packages/igniterlabs/ti-ext-visitortracker"><img src="https://img.shields.io/packagist/dt/igniterlabs/ti-ext-visitortracker" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/igniterlabs/ti-ext-visitortracker"><img src="https://img.shields.io/packagist/v/igniterlabs/ti-ext-visitortracker" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/igniterlabs/ti-ext-visitortracker"><img src="https://img.shields.io/packagist/l/igniterlabs/ti-ext-visitortracker" alt="License"></a>
+</p>
 
-> After extension installation, enable GeoIP by clicking the 'Update GeoIP Database' button on the Page Visits page.
+## Introduction
 
-Tracker gathers a lot of information from your requests to identify and store:
+The TastyIgniter Visitor Tracker extension is designed to help you monitor and analyze the traffic on your TastyIgniter website. It provides detailed insights into your visitors' behavior, including their geographical location, device type, browser, and operating system.
 
-- Sessions
-- Page Views (hits on routes)
-- Users (logged users)
-- Devices (computer, smartphone, tablet...)
-- Browsers (Chrome, Mozilla Firefox, Safari, Internet Explorer...)
-- Operating Systems (iOS, Mac OS, Linux, Windows...)
-- Geo-Location Data (Latitude, Longitude, Country and City)
-- Routes and all its parameters
-- Referers (URL)
+This extension is particularly useful for restaurant owners and website administrators who want to understand their audience better and optimize their online presence accordingly.
 
-### Usage
+## Features
 
-In the admin user interface you can exclude page, routes from being tracked and set how long to keep logs. 
+- Track visitor sessions and page views
+- Monitor logged-in users and their activities
+- Identify devices used by visitors (computer, smartphone, tablet, etc.)
+- Analyze browser usage (Chrome, Mozilla Firefox, Safari, Internet Explorer, etc.)
+- Gather operating system data (iOS, Mac OS, Linux, Windows, etc.)
+- Collect geo-location data (latitude, longitude, country, and city)
+- Track routes and their parameters
+- Record referers (URLs) to understand where visitors are coming from
+- Exclude specific pages or routes from tracking
+- Set retention period for logs to manage data storage
+- Easy-to-use admin interface for configuration and management
+- Supports IPstack and Maxmind GeoIP for accurate location tracking
 
-- Go to **Manage > Settings > Visitor Tracker Settings** to configure the extension settings
+## Documentation
 
-### License
-[The MIT License (MIT)](https://tastyigniter.com/licence/)
+More documentation can be found on [here](https://github.com/igniter-labs/ti-ext-visitortracker/blob/master/docs/index.md).
+
+## Changelog
+
+Please see [CHANGELOG](https://github.com/igniter-labs/ti-ext-visitortracker/blob/master/CHANGELOG.md) for more information on what has changed recently.
+
+## Reporting issues
+
+If you encounter a bug in this extension, please report it using the [Issue Tracker](https://github.com/igniter-labs/ti-ext-visitortracker/issues) on GitHub.
+
+## Contributing
+
+Contributions are welcome! Please read [TastyIgniter's contributing guide](https://tastyigniter.com/docs/resources/contribution-guide).
+
+## Security vulnerabilities
+
+For reporting security vulnerabilities, please see [our security policy](https://github.com/igniter-labs/ti-ext-visitortracker/security/policy).
+
+## License
+
+TastyIgniter Visitor Tracker extension is open-source software licensed under the [MIT license](https://github.com/igniter-labs/ti-ext-visitortracker/blob/master/LICENSE.md).

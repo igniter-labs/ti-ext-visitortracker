@@ -4,27 +4,39 @@ section: "extensions"
 sortOrder: 999
 ---
 
-Enables you to track your visitors, browsers, operating systems, page views & visits on your TastyIgniter website. See how many users are online on your TastyIgniter website with detailed statistics.
+## Installation
 
-> After extension installation, enable GeoIP by clicking the 'Update GeoIP Database' button on the Page Visits page.
+You can install the extension via composer using the following command:
 
-Tracker gathers a lot of information from your requests to identify and store:
+```bash
+composer require igniterlabs/ti-ext-visitortracker -W
+```
 
-- Sessions
-- Page Views (hits on routes)
-- Users (logged users)
-- Devices (computer, smartphone, tablet...)
-- Browsers (Chrome, Mozilla Firefox, Safari, Internet Explorer...)
-- Operating Systems (iOS, Mac OS, Linux, Windows...)
-- Geo-Location Data (Latitude, Longitude, Country and City)
-- Routes and all its parameters
-- Referers (URL)
+Run the database migrations to create the required tables:
 
-### Usage
+```bash
+php artisan igniter:up
+```
 
-In the admin user interface you can exclude page, routes from being tracked and set how long to keep logs. 
+## Getting started
 
-- Go to **Manage > Settings > Visitor Tracker Settings** to configure the extension settings
+From your TastyIgniter Admin, you can manage visitor tracking settings by navigating to the **Manage > Settings > Visitor Tracker Settings** admin page. Here you can configure the following:
 
-### License
-[The MIT License (MIT)](https://tastyigniter.com/licence/)
+- **Tracker Status**: Toggle to enable or disable visitor tracking.
+- **Track Robots**: Enable or disable tracking of robots.
+- **Exclude routes:** Specify routes to exclude from tracking, such as `api/*`, `admin/*`, etc. Separate multiple routes with a new line.
+- **Exclude paths:** Specify paths to exclude from tracking, such as `/login`, `/register`, etc. Separate multiple paths with a new line.
+- **Exclude IP Addresses:** Specify IP addresses to exclude from tracking. Separate multiple IP addresses with a comma.
+- **Online Timeout:** Set the timeout duration (in minutes) for online visitors. If a visitor is inactive for this duration, they will be considered offline.
+- **Keep Logs Duration:** Set how long to keep visitor logs (in days). After this period, logs will be automatically deleted.
+- **GeoIP Reader:** Select the GeoIP reader to use for tracking visitor locations. You can choose from:
+  - **IPstack**: Uses ipstack.com for GeoIP tracking.
+  - **MaxMind GeoLite2**: Uses MaxMind's GeoLite2 database for GeoIP tracking.
+  - **None**: Disables GeoIP tracking.
+- **IPstack API Key**: If you choose the IPstack reader, enter your IPstack API key here. You can obtain an API key by signing up at [ipstack.com](https://ipstack.com/).
+- Click the **Save** button to apply your changes.
+
+There are two pages in the admin user interface for viewing visitor data:
+
+- Navigate to the **Page Visits** admin page to see a list of visitors and their page views.
+- Navigate to the **Pages Visits > Pages Views** admin page to see a list of all page views, including the date, time, and visitor details.
