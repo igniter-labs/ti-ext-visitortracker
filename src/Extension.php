@@ -106,6 +106,7 @@ class Extension extends BaseExtension
             'settings' => [
                 'label' => 'Visitor Tracker Settings',
                 'description' => 'Manage visitor tracker settings.',
+                'icon' => 'fa fa-map-location-dot',
                 'model' => Settings::class,
                 'request' => SettingsRequest::class,
                 'permissions' => ['IgniterLabs.VisitorTracker.*'],
