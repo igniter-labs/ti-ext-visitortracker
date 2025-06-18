@@ -89,12 +89,12 @@ return new class extends Migration
         Schema::create('igniterlabs_visitortracker_geoip', function(Blueprint $table): void {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->double('latitude')->nullable()->index();
-            $table->double('longitude')->nullable()->index();
+            $table->double('latitude')->nullable()->index('visitortracker_geoip_latitude_index');
+            $table->double('longitude')->nullable()->index('visitortracker_geoip_longitude_index');
             $table->string('region')->nullable();
-            $table->string('city')->nullable()->index();
+            $table->string('city')->nullable()->index('visitortracker_geoip_city_index');
             $table->string('postal_code')->nullable();
-            $table->string('country_iso_code_2')->nullable()->index();
+            $table->string('country_iso_code_2')->nullable()->index('visitortracker_geoip_country_iso_code_2_index');
             $table->timestamps();
         });
     }
