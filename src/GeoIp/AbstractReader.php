@@ -4,109 +4,57 @@ declare(strict_types=1);
 
 namespace IgniterLabs\VisitorTracker\GeoIp;
 
-use GuzzleHttp\Client as HttpClient;
-
 abstract class AbstractReader
 {
     /**
-     * Holds recorrd fetched from a remote geoapi service.
-     *
-     * @var object
+     * Holds record fetched from a remote geoapi service.
      */
-    protected $record;
-
-    /**
-     * Create a new GeoIP reader instance.
-     *
-     * @return void
-     */
-    public function __construct(
-        /**
-         * The HTTP client instance.
-         */
-        protected HttpClient $http,
-    ) {}
+    protected ?object $record = null;
 
     /**
      * Fetch data from a remote geoapi service.
      *
      * @return $this
      */
-    public function retrieve(string $ip)
-    {
-        $response = $this->http->get($this->getEndpoint($ip));
-        if ($response->getStatusCode() == 200) {
-            $this->record = json_decode($response->getBody()->getContents());
-        }
-
-        return $this;
-    }
-
-    public function getRecord()
-    {
-        return $this->record;
-    }
-
-    /**
-     * Returns an endpoint to fetch the record from.
-     *
-     * @param string $ip IP address to fetch geoip record for
-     */
-    abstract protected function getEndpoint(string $ip): string;
+    abstract public function retrieve(string $ip): static;
 
     /**
      * Returns latitude from the geoip record.
-     *
-     * @return string
      */
-    abstract public function latitude();
+    abstract public function latitude(): ?string;
 
     /**
      * Returns longitude from the geoip record.
-     *
-     * @return string
      */
-    abstract public function longitude();
+    abstract public function longitude(): ?string;
 
     /**
      * Returns region from the geoip record.
-     *
-     * @return string
      */
-    abstract public function region();
+    abstract public function region(): ?string;
 
     /**
      * Returns region from the geoip record.
-     *
-     * @return string
      */
-    abstract public function regionISOCode();
+    abstract public function regionISOCode(): ?string;
 
     /**
      * Returns city from the geoip record.
-     *
-     * @return string
      */
-    abstract public function city();
+    abstract public function city(): ?string;
 
     /**
      * Returns postal code from the geoip record.
-     *
-     * @return string
      */
-    abstract public function postalCode();
+    abstract public function postalCode(): ?string;
 
     /**
      * Returns country from the geoip record.
-     *
-     * @return string
      */
-    abstract public function country();
+    abstract public function country(): ?string;
 
     /**
      * Returns country code from the geoip record.
-     *
-     * @return string
      */
-    abstract public function countryISOCode();
+    abstract public function countryISOCode(): ?string;
 }

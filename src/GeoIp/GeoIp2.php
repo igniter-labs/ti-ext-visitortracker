@@ -21,15 +21,15 @@ class GeoIp2 extends AbstractReader
     #[Override]
     public function retrieve(string $ip): static
     {
-        $accountId = Settings::get('geoip_reader_maxmind_account_id');
-        $licenseKey = Settings::get('geoip_reader_maxmind_license_key');
+        $accountId = (int)Settings::get('geoip_reader_maxmind_account_id');
+        $licenseKey = (string)Settings::get('geoip_reader_maxmind_license_key');
 
         try {
-            if (!strlen($accountId) || !strlen($licenseKey)) {
+            if (!$accountId || !strlen($licenseKey)) {
                 throw new InvalidArgumentException('Missing GeoIP account ID or license key');
             }
 
-            $client = new Client((int)$accountId, $licenseKey);
+            $client = new Client($accountId, $licenseKey);
             $this->record = $client->city($ip);
         } catch (Exception $ex) {
             Log::error('GeoIp2 Error -> '.$ex->getMessage());
@@ -39,92 +39,66 @@ class GeoIp2 extends AbstractReader
     }
 
     /**
-     * Returns an endpoint to fetch the record from.
-     *
-     * @param string $ip IP address to fetch geoip record for
-     */
-    protected function getEndpoint(string $ip): string
-    {
-        return '';
-    }
-
-    /**
      * Returns latitude from the geoip record.
-     *
-     * @return string
      */
-    public function latitude()
+    public function latitude(): ?string
     {
-        return $this->record->location->latitude;
+        return $this->record?->location?->latitude;
     }
 
     /**
      * Returns longitude from the geoip record.
-     *
-     * @return string
      */
-    public function longitude()
+    public function longitude(): ?string
     {
-        return $this->record->location->longitude;
+        return $this->record?->location?->longitude;
     }
 
     /**
      * Returns region from the geoip record.
-     *
-     * @return string
      */
-    public function region()
+    public function region(): ?string
     {
-        return $this->record->mostSpecificSubdivision->name;
+        return $this->record?->mostSpecificSubdivision?->name;
     }
 
     /**
      * Returns region from the geoip record.
-     *
-     * @return string
      */
-    public function regionISOCode()
+    public function regionISOCode(): ?string
     {
-        return $this->record->mostSpecificSubdivision->isoCode;
+        return $this->record?->mostSpecificSubdivision?->isoCode;
     }
 
     /**
      * Returns city from the geoip record.
-     *
-     * @return string
      */
-    public function city()
+    public function city(): ?string
     {
-        return $this->record->city->name;
+        return $this->record?->city?->name;
     }
 
     /**
      * Returns postal code from the geoip record.
-     *
-     * @return string
      */
-    public function postalCode()
+    public function postalCode(): ?string
     {
-        return $this->record->postal->code;
+        return $this->record?->postal?->code;
     }
 
     /**
      * Returns country from the geoip record.
-     *
-     * @return string
      */
-    public function country()
+    public function country(): ?string
     {
-        return $this->record->country->name;
+        return $this->record?->country?->name;
     }
 
     /**
      * Returns country code from the geoip record.
-     *
-     * @return string
      */
-    public function countryISOCode()
+    public function countryISOCode(): ?string
     {
-        return $this->record->country->isoCode;
+        return $this->record?->country?->isoCode;
     }
 }

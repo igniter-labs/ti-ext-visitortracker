@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace IgniterLabs\VisitorTracker\GeoIp;
 
-use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\Manager;
 
+/**
+ * @method AbstractReader retrieve(string $ip)
+ * @method string|null latitude()
+ * @method string|null longitude()
+ * @method string|null region()
+ * @method string|null regionISOCode()
+ * @method string|null city()
+ * @method string|null postalCode()
+ * @method string|null country()
+ * @method string|null countryISOCode()
+ */
 class ReaderManager extends Manager
 {
     /**
@@ -31,7 +41,7 @@ class ReaderManager extends Manager
      */
     protected function createGeoip2Driver(): GeoIp2
     {
-        return new GeoIp2(new HttpClient);
+        return resolve(GeoIp2::class);
     }
 
     /**
@@ -39,7 +49,7 @@ class ReaderManager extends Manager
      */
     protected function createIpstackDriver(): Ipstack
     {
-        return new Ipstack(new HttpClient);
+        return resolve(Ipstack::class);
     }
 
     /**

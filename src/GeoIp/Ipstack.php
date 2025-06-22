@@ -6,6 +6,7 @@ namespace IgniterLabs\VisitorTracker\GeoIp;
 
 use Exception;
 use IgniterLabs\VisitorTracker\Models\Settings;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 use Override;
@@ -22,17 +23,20 @@ class Ipstack extends AbstractReader
     public function retrieve(string $ip): static
     {
         try {
-            $response = $this->http->get($this->getEndpoint($ip));
+            $response = Http::get($this->getEndpoint($ip));
 
-            if ($response->getStatusCode() == 200) {
-                $record = json_decode($response->getBody()->getContents());
+            throw_unless(
+                $response->ok(),
+                new InvalidArgumentException('Failed to retrieve geoip record'),
+            );
 
-                if (isset($record->error)) {
-                    throw new RuntimeException($record->error->info);
-                }
+            $record = $response->object();
 
-                $this->record = isset($record->success) ? $record : null;
+            if (isset($record->error)) {
+                throw new RuntimeException($record->error->info);
             }
+
+            $this->record = $record->ip === $ip ? $record : null;
         } catch (Exception $ex) {
             Log::error('Ipstack Error -> '.$ex->getMessage());
         }
@@ -47,92 +51,75 @@ class Ipstack extends AbstractReader
      */
     protected function getEndpoint(string $ip): string
     {
-        $accessKey = Settings::get('geoip_reader_ipstack_access_key');
-
-        if ((string)$accessKey === '') {
-            throw new InvalidArgumentException('Missing ipstack access key');
-        }
+        throw_unless(
+            $accessKey = Settings::get('geoip_reader_ipstack_access_key'),
+            new InvalidArgumentException('Missing ipstack access key'),
+        );
 
         return sprintf('http://api.ipstack.com/%s?access_key=%s', $ip, $accessKey);
     }
 
     /**
      * Returns latitude from the geoip record.
-     *
-     * @return string
      */
-    public function latitude()
+    public function latitude(): ?string
     {
-        return $this->record->latitude;
+        return $this->record?->latitude;
     }
 
     /**
      * Returns longitude from the geoip record.
-     *
-     * @return string
      */
-    public function longitude()
+    public function longitude(): ?string
     {
-        return $this->record->longitude;
+        return $this->record?->longitude;
     }
 
     /**
      * Returns region from the geoip record.
-     *
-     * @return string
      */
-    public function region()
+    public function region(): ?string
     {
-        return $this->record->region_name;
+        return $this->record?->region_name;
     }
 
     /**
      * Returns region ISO code from the geoip record.
-     *
-     * @return string
      */
-    public function regionISOCode()
+    public function regionISOCode(): ?string
     {
-        return $this->record->region_code;
+        return $this->record?->region_code;
     }
 
     /**
      * Returns city from the geoip record.
-     *
-     * @return string
      */
-    public function city()
+    public function city(): ?string
     {
-        return $this->record->city;
+        return $this->record?->city;
     }
 
     /**
      * Returns postal code from the geoip record.
-     *
-     * @return string
      */
-    public function postalCode()
+    public function postalCode(): ?string
     {
-        return $this->record->zip;
+        return $this->record?->zip;
     }
 
     /**
      * Returns country from the geoip record.
-     *
-     * @return string
      */
-    public function country()
+    public function country(): ?string
     {
-        return $this->record->country_name;
+        return $this->record?->country_name;
     }
 
     /**
      * Returns country ISO code from the geoip record.
-     *
-     * @return string
      */
-    public function countryISOCode()
+    public function countryISOCode(): ?string
     {
-        return $this->record->country_code;
+        return $this->record?->country_code;
     }
 }
