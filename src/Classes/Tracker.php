@@ -60,7 +60,7 @@ class Tracker
 
     protected function isTrackable(): bool
     {
-        return ((bool)$this->config->get('status', true))
+        return $this->config->get('status', true)
             && $this->isTrackableIp()
             && $this->robotIsTrackable()
             && $this->routeIsTrackable()
@@ -70,31 +70,20 @@ class Tracker
     protected function isTrackableIp(): bool
     {
         $ipAddress = $this->request->getClientIp();
-        $excludeIps = $this->config->get('exclude_ips');
+        $excludeIps = $this->explodeString($this->config->get('exclude_ips') ?: '');
 
-        return !$excludeIps
-            || $this->ipNotInRanges($ipAddress, $excludeIps);
+        return !$excludeIps || $this->ipNotInRanges($ipAddress, $excludeIps);
     }
 
-    protected function robotIsTrackable()
+    protected function robotIsTrackable(): bool
     {
-        $trackRobots = (bool)$this->config->get('track_robots', false);
-
-        if (!$this->agent->isRobot()) {
-            return true;
-        }
-
-        return $this->agent->isRobot() && $trackRobots;
+        return !$this->agent->isRobot() || $this->config->get('track_robots', false);
     }
 
-    protected function routeIsTrackable()
+    protected function routeIsTrackable(): bool
     {
-        if (!$this->route) {
-            return false;
-        }
-
         $currentRouteName = $this->route->currentRouteName();
-        $excludeRoutes = $this->explodeString($this->config->get('exclude_routes') ?? '');
+        $excludeRoutes = $this->explodeString($this->config->get('exclude_routes') ?: '');
 
         return !$excludeRoutes
             || !$currentRouteName
@@ -104,11 +93,10 @@ class Tracker
     protected function pathIsTrackable(): bool
     {
         $currentPath = $this->request->path();
-        $excludePaths = $this->explodeString($this->config->get('exclude_paths') ?? '');
+        $excludePaths = $this->explodeString($this->config->get('exclude_paths') ?: '');
         $excludePaths = array_merge(self::EXCLUDE_PATHS, $excludePaths);
 
-        return !$excludePaths
-            || empty($currentPath)
+        return empty($currentPath)
             || !$this->matchesPattern($currentPath, $excludePaths);
     }
 
@@ -136,11 +124,7 @@ class Tracker
     {
         $referer = $this->request->header('referer', $this->request->header('utm_source', ''));
 
-        if (starts_with($referer, page_url('home'))) {
-            $referer = null;
-        }
-
-        return $referer;
+        return starts_with($referer, page_url('home')) ? null : $referer;
     }
 
     //
@@ -149,44 +133,32 @@ class Tracker
 
     protected function getGeoIpId()
     {
-        if (!$this->readerManager->getDefaultDriver()) {
-            return null;
-        }
-
         $reader = $this->readerManager->retrieve($this->request->getClientIp());
-
-        if (!$reader->getRecord()) {
+        if (!$geoIpData = $this->getGeoIpData($reader)) {
             return null;
         }
 
-        return $this->repositoryManager->createGeoIp(
-            $this->getGeoIpData($reader),
-            ['latitude', 'longitude'],
-        );
+        return $this->repositoryManager->createGeoIp($geoIpData, ['latitude', 'longitude']);
     }
 
     protected function getGeoIpData(AbstractReader $reader): array
     {
-        return [
+        return array_filter([
             'latitude' => $reader->latitude(),
             'longitude' => $reader->longitude(),
             'region' => $reader->region(),
             'city' => $reader->city(),
             'postal_code' => $reader->postalCode(),
             'country_iso_code_2' => $reader->countryISOCode(),
-        ];
+        ]);
     }
 
     //
     // IP Range
     //
 
-    protected function ipNotInRanges($ip, $excludeRange): bool
+    protected function ipNotInRanges(string $ip, array $excludeRange): bool
     {
-        if (!is_array($excludeRange)) {
-            $excludeRange = [$excludeRange];
-        }
-
         foreach ($excludeRange as $range) {
             if ($this->ipInRange($ip, $range)) {
                 return false;
@@ -196,7 +168,7 @@ class Tracker
         return true;
     }
 
-    protected function ipInRange($ip, $range)
+    protected function ipInRange(string $ip, string $range)
     {
         // Wildcarded range
         // 192.168.1.*
@@ -208,7 +180,7 @@ class Tracker
         if ($parsedRange = $this->ipRangeIsDashed($range)) {
             [$ip1, $ip2] = $parsedRange;
 
-            return ip2long($ip) >= $ip1 && ip2long($ip) <= $ip2;
+            return ip2long($ip) >= ip2long($ip1) && ip2long($ip) <= ip2long($ip2);
         }
 
         // Masked range or fixed IP
@@ -218,18 +190,18 @@ class Tracker
         return $this->ipv4MatchMask($ip, $range);
     }
 
-    protected function ipRangeIsWildCard($range)
+    protected function ipRangeIsWildCard(string $range): string
     {
-        if (!str_contains((string)$range, '-') && str_contains((string)$range, '*')) {
+        if (!str_contains($range, '-') && str_contains($range, '*')) {
             return str_replace('*', '0', $range).'-'.str_replace('*', '255', $range);
         }
 
-        return null;
+        return $range;
     }
 
-    protected function ipRangeIsDashed($range): ?array
+    protected function ipRangeIsDashed(string $range): ?array
     {
-        if (count($twoIps = explode('-', (string)$range)) == 2) {
+        if (count($twoIps = explode('-', $range)) == 2) {
             return $twoIps;
         }
 
@@ -247,10 +219,10 @@ class Tracker
         $network_long = ip2long($ipv4_arr[0]);
 
         $x = ip2long($ipv4_arr[1]);
-        $mask = long2ip($x) == $ipv4_arr[1] ? $x : 0xFFFFFFFF << (32 - $ipv4_arr[1]);
+        $mask = long2ip($x) === $ipv4_arr[1] ? $x : 0xFFFFFFFF << (32 - $ipv4_arr[1]);
         $ipv4_long = ip2long($ip);
 
-        return ($ipv4_long & $mask) == ($network_long & $mask);
+        return ($ipv4_long & $mask) === ($network_long & $mask);
     }
 
     //

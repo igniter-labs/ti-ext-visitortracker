@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Igniter\Flame\Database\Model;
-use Igniter\Flame\Exception\SystemException;
 use Igniter\Main\Classes\ThemeManager;
 use Igniter\System\Actions\SettingsModel;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * @method static mixed get(string $key, mixed $default = null)
+ * @method static mixed set(string|array $key, mixed $value = null)
+ * @mixin SettingsModel
+ */
 class Settings extends Model
 {
     public array $implement = [SettingsModel::class];
@@ -42,49 +45,5 @@ class Settings extends Model
         }
 
         return $pages;
-    }
-
-    public function updateMaxMindDatabase(): bool
-    {
-        // Get settings
-        $url = $this->getUpdateUrl();
-        $path = $this->getDatabasePath();
-
-        // Get header response
-        $headers = get_headers($url);
-        if (substr((string) $headers[0], 9, 3) !== '200') {
-            throw new SystemException('Unable to download database. ('.substr((string) $headers[0], 13).')');
-        }
-
-        // Download zipped database to a system temp file
-        $tmpFile = tempnam(sys_get_temp_dir(), 'maxmind');
-        file_put_contents($tmpFile, fopen($url, 'r'));
-
-        // Unzip and save database
-        file_put_contents($path, gzopen($tmpFile, 'r'));
-
-        // Remove temp file
-        @unlink($tmpFile);
-
-        return true;
-    }
-
-    public function getUpdateUrl()
-    {
-        return $this->get('update_url', 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz');
-    }
-
-    public function getDatabasePath()
-    {
-        return $this->get('database_path', storage_path('app/geoip.mmdb'));
-    }
-
-    public function ensureDatabaseExists(): static
-    {
-        if (!File::exists($this->getDatabasePath())) {
-            $this->updateMaxMindDatabase();
-        }
-
-        return $this;
     }
 }

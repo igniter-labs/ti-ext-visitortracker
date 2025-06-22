@@ -35,34 +35,33 @@ class Extension extends BaseExtension
 
         $this->app->register(AgentServiceProvider::class);
 
-        $this->app->singleton('tracker.reader', fn($app): ReaderManager => new ReaderManager($app));
+        $this->app->singleton(ReaderManager::class);
 
-        $this->app->singleton('tracker.repository.manager', fn($app): RepositoryManager => new RepositoryManager(
+        $this->app->singleton(RepositoryManager::class, fn($app): RepositoryManager => new RepositoryManager(
             new PageVisit,
             new GeoIp,
         ));
 
-        $this->app->singleton('tracker', fn($app): Tracker => new Tracker(
+        $this->app->singleton(Tracker::class, fn($app): Tracker => new Tracker(
             Settings::instance(),
-            $app['tracker.repository.manager'],
+            $app[RepositoryManager::class],
             $app['request'],
             $app['session.store'],
             $app['router'],
             $app['agent'],
-            $app['tracker.reader'],
+            $app[ReaderManager::class],
         ));
 
         if (!Igniter::runningInAdmin()) {
             $this->app[Kernel::class]->pushMiddleware(TrackVisitor::class);
         }
-
     }
 
     #[Override]
     public function boot(): void
     {
         $this->app->booted(function(): void {
-            if (Igniter::hasDatabase() && (int)Settings::get('archive_time_out')) {
+            if (Igniter::hasDatabase() && Settings::get('archive_time_out')) {
                 Igniter::prunableModel(PageVisit::class);
             }
 
@@ -114,7 +113,7 @@ class Extension extends BaseExtension
         ];
     }
 
-    public function registerPageViewsDatasetOnChartsWidget(): void
+    protected function registerPageViewsDatasetOnChartsWidget(): void
     {
         Charts::registerDatasets(fn(): array => [
             'pageviews' => [

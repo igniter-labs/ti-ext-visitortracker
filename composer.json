@@ -68,7 +68,7 @@
             "@test:lint",
             "@test:refactor",
             "@test:static",
-            "@test:pest"
+            "@test:coverage"
         ]
     }
 }

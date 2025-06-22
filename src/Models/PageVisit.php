@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace IgniterLabs\VisitorTracker\Models;
 
 use Carbon\Carbon;
+use Igniter\Flame\Database\Factories\HasFactory;
 use Igniter\Flame\Database\Model;
 use Igniter\System\Facades\Country;
 use Igniter\User\Models\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Support\Collection;
 use Jenssegers\Agent\Agent;
 
 /**
@@ -17,6 +19,7 @@ use Jenssegers\Agent\Agent;
  */
 class PageVisit extends Model
 {
+    use HasFactory;
     use Prunable;
 
     /**
@@ -42,10 +45,7 @@ class PageVisit extends Model
         'headers' => 'array',
     ];
 
-    /**
-     * @var Agent
-     */
-    protected $agentClass;
+    protected ?Agent $agentClass = null;
 
     protected function afterFetch()
     {
@@ -58,7 +58,7 @@ class PageVisit extends Model
 
     public function getAccessTypeAttribute($value): string
     {
-        return ucwords((string) $value);
+        return ucwords((string)$value);
     }
 
     public function getDateAddedAttribute($value): string
@@ -68,30 +68,22 @@ class PageVisit extends Model
 
     public function getCountryNameAttribute()
     {
-        if (!$this->geoip) {
-            return null;
-        }
-
-        return Country::getCountryNameByCode($this->geoip->country_iso_code_2);
+        return $this->geoip ? Country::getCountryNameByCode($this->geoip->country_iso_code_2) : null;
     }
 
     public function getCountryCityAttribute(): string
     {
-        return $this->country_name.' - '.($this->geoip ? $this->geoip->city : null);
+        return $this->country_name.($this->geoip ? ' - '.$this->geoip->city : null);
     }
 
     public function getCustomerNameAttribute()
     {
-        if (!$this->customer) {
-            return lang('igniterlabs.visitortracker::default.text_guest');
-        }
-
-        return $this->customer->full_name;
+        return $this->customer->full_name ?? lang('igniterlabs.visitortracker::default.text_guest');
     }
 
     protected function getPlatformAttribute(): ?string
     {
-        if (!$this->agentClass) {
+        if (is_null($this->agentClass)) {
             return null;
         }
 
@@ -112,12 +104,8 @@ class PageVisit extends Model
                 .' ['.$platform.'] ['.$this->agentClass->device().']';
         }
 
-        if ($this->agentClass->isDesktop()) {
-            return lang('igniterlabs.visitortracker::default.text_computer')
-                .' ['.$platform.']';
-        }
-
-        return null;
+        return lang('igniterlabs.visitortracker::default.text_computer')
+            .' ['.$platform.']';
     }
 
     //
@@ -128,7 +116,7 @@ class PageVisit extends Model
     {
         if ($value) {
             $onlineTimeOut = Settings::get('online_time_out', 5);
-            $query->where('created_at', '>=', Carbon::now()->subMinutes($onlineTimeOut));
+            $query->where('created_at', '>=', Carbon::now()->subMinutes((int)$onlineTimeOut));
         }
 
         return $query;
@@ -140,49 +128,43 @@ class PageVisit extends Model
 
     protected function applyAgentClass()
     {
-        if (empty($this->user_agent) || !count($this->headers)) {
+        if (empty($this->user_agent) || !$this->headers) {
             return;
         }
 
         $agent = new Agent;
 
-        $agent->setUserAgent($userAgent = $this->user_agent);
-        $agent->setHttpHeaders($headers = $this->headers);
+        $agent->setUserAgent($this->user_agent);
+        $agent->setHttpHeaders($this->headers);
 
         $this->agentClass = $agent;
     }
 
-    public function getAgent()
+    public function getAgent(): ?Agent
     {
         return $this->agentClass;
     }
 
     /**
      * Find when a customer was last online by ip.
-     *
-     * @param string $ip the IP address of the current user
-     *
-     * @return array
      */
-    public function getLastOnline($ip)
+    public function getLastOnline(string $ip): ?static
     {
         return $this->selectRaw('*, MAX(created_at) as created_at')->where('ip_address', $ip)->first();
     }
 
     /**
      * Return the last online dates of all customers.
-     *
-     * @return array
      */
-    public function getOnlineDates()
+    public function getOnlineDates(): Collection
     {
         return $this->pluckDates('created_at');
     }
 
     public function prunable(): Builder
     {
-        $pastMonths = (int)Settings::get('archive_time_out', 1);
+        $pastMonths = Settings::get('archive_time_out', 1);
 
-        return static::where('updated_at', '<=', now()->subMonths($pastMonths));
+        return static::where('updated_at', '<=', now()->subMonths((int)$pastMonths));
     }
 }

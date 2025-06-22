@@ -1,33 +1,21 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:create\(\)\.$#'
-			identifier: method.notFound
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			identifier: cast.int
 			count: 1
 			path: src/Classes/RepositoryManager.php
 
 		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:where\(\)\.$#'
-			identifier: staticMethod.notFound
+			message: '#^Static method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
 			count: 1
 			path: src/Classes/RepositoryManager.php
 
 		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: staticMethod.notFound
+			message: '#^Binary operation "\-" between 32 and string results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
-			path: src/Classes/RepositoryManager.php
-
-		-
-			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager\:\:retrieve\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Classes/Tracker.php
-
-		-
-			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 6
 			path: src/Classes/Tracker.php
 
 		-
@@ -43,61 +31,61 @@ parameters:
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Function ipv4_match_mask not found\.$#'
-			identifier: function.notFound
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
 			count: 1
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: src/Extension.php
-
-		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:instance\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: src/Extension.php
-
-		-
-			message: '#^Class IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager referenced with incorrect case\: IgniterLabs\\VisitorTracker\\Geoip\\ReaderManager\.$#'
-			identifier: class.nameCase
+			message: '#^Method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
 			count: 3
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Parameter \#1 \$reader of method IgniterLabs\\VisitorTracker\\Classes\\Tracker\:\:getGeoIpData\(\) expects IgniterLabs\\VisitorTracker\\GeoIp\\AbstractReader, IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Parameter \#1 \$reader of method IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager\:\:setDefaultDriver\(\) expects string, Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Parameter \#1 \$string of method IgniterLabs\\VisitorTracker\\Classes\\Tracker\:\:explodeString\(\) expects string, Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Right side of \|\| is always true\.$#'
+			identifier: booleanOr.rightAlwaysTrue
+			count: 1
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
+			count: 3
+			path: src/Classes/Tracker.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
 			path: src/Extension.php
 
 		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 2
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			identifier: cast.int
+			count: 1
 			path: src/GeoIp/GeoIp2.php
 
 		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: src/GeoIp/Ipstack.php
-
-		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:isConfigured\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: src/Http/Middleware/TrackVisitor.php
-
-		-
 			message: '#^Access to an undefined property \$this\(IgniterLabs\\VisitorTracker\\Models\\PageVisit\)\:\:\$headers\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Models/PageVisit.php
-
-		-
-			message: '#^Access to an undefined property IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:\$country_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Models/PageVisit.php
-
-		-
-			message: '#^Access to an undefined property IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:\$customer\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Models/PageVisit.php
@@ -109,31 +97,25 @@ parameters:
 			path: src/Models/PageVisit.php
 
 		-
-			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:pluckDates\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Models/PageVisit.php
-
-		-
-			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:selectRaw\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Models/PageVisit.php
-
-		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:where\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
-			path: src/Models/PageVisit.php
-
-		-
-			message: '#^Call to an undefined static method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: staticMethod.notFound
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			identifier: cast.int
 			count: 2
 			path: src/Models/PageVisit.php
 
 		-
-			message: '#^Call to an undefined method IgniterLabs\\VisitorTracker\\Models\\Settings\:\:get\(\)\.$#'
-			identifier: method.notFound
+			message: '#^Method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:getLastOnline\(\) should return static\(IgniterLabs\\VisitorTracker\\Models\\PageVisit\)\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Models/PageVisit.php
+
+		-
+			message: '#^Static method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
 			count: 2
+			path: src/Models/PageVisit.php
+
+		-
+			message: '#^Argument of an invalid type Illuminate\\Routing\\RouteCollectionInterface supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
 			path: src/Models/Settings.php

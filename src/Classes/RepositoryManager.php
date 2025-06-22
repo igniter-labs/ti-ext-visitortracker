@@ -18,11 +18,9 @@ class RepositoryManager
         return $this->trackerModel->create($log);
     }
 
-    public function createGeoIp($geoip, $keys = null)
+    public function createGeoIp(array $attributes, ?array $keys = null)
     {
-        $geoip = $this->findOrCreate($this->geoIpModel, $geoip, $keys);
-
-        return $geoip ? $geoip->id : null;
+        return $this->findOrCreate($this->geoIpModel, $attributes, $keys)?->id;
     }
 
     public function findOrCreate($model, array $attributes, $keys = null)
@@ -39,11 +37,7 @@ class RepositoryManager
             $foundModel = $model->create($attributes);
         }
 
-        if (!$foundModel->exists) {
-            return null;
-        }
-
-        return $foundModel;
+        return $foundModel->exists ? $foundModel : null;
     }
 
     public function clearLog(): void
