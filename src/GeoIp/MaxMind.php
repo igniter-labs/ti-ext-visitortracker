@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 use Override;
 
-class GeoIp2 extends AbstractReader
+class MaxMind extends AbstractReader
 {
     /**
      * Fetch data from a remote geoapi service.

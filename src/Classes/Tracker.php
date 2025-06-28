@@ -37,7 +37,7 @@ class Tracker
         $this->agent->setUserAgent($this->request->userAgent());
         $this->agent->setHttpHeaders($this->request->header());
 
-        $this->readerManager->setDefaultDriver($this->config->get('geoip_reader', 'geoip2'));
+        $this->readerManager->setDefaultDriver($this->config->get('geoip_reader', 'maxmind'));
     }
 
     public function boot(): void
@@ -133,6 +133,10 @@ class Tracker
 
     protected function getGeoIpId()
     {
+        if (!$this->config->isConnected()) {
+            return null;
+        }
+
         $reader = $this->readerManager->retrieve($this->request->getClientIp());
         if (!$geoIpData = $this->getGeoIpData($reader)) {
             return null;

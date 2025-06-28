@@ -65,7 +65,7 @@ return [
                 'type' => 'select',
                 'default' => 'maxmind',
                 'options' => [
-                    'geoip2' => 'lang:igniterlabs.visitortracker::default.text_maxmind',
+                    'maxmind' => 'lang:igniterlabs.visitortracker::default.text_maxmind',
                     'ipstack' => 'lang:igniterlabs.visitortracker::default.text_ipstack',
                 ],
             ],
@@ -87,7 +87,7 @@ return [
                 'trigger' => [
                     'action' => 'show',
                     'field' => 'geoip_reader',
-                    'condition' => 'value[geoip2]',
+                    'condition' => 'value[maxmind]',
                 ],
             ],
             'geoip_reader_maxmind_license_key' => [
@@ -97,7 +97,7 @@ return [
                 'trigger' => [
                     'action' => 'show',
                     'field' => 'geoip_reader',
-                    'condition' => 'value[geoip2]',
+                    'condition' => 'value[maxmind]',
                 ],
             ],
         ],

@@ -37,10 +37,10 @@ class SettingsRequest extends FormRequest
             'exclude_ips' => ['nullable', 'string'],
             'online_time_out' => ['required', 'integer'],
             'archive_time_out' => ['required', 'integer'],
-            'geoip_reader' => ['nullable', 'in:geoip2,ipstack'],
+            'geoip_reader' => ['nullable', 'in:maxmind,ipstack'],
             'geoip_reader_ipstack_access_key' => ['nullable', 'required_if:geoip_reader,ipstack', 'string'],
-            'geoip_reader_maxmind_account_id' => ['nullable', 'required_if:geoip_reader,geoip2', 'string'],
-            'geoip_reader_maxmind_license_key' => ['nullable', 'required_if:geoip_reader,geoip2', 'string'],
+            'geoip_reader_maxmind_account_id' => ['nullable', 'required_if:geoip_reader,maxmind', 'string'],
+            'geoip_reader_maxmind_license_key' => ['nullable', 'required_if:geoip_reader,maxmind', 'string'],
         ];
     }
 }

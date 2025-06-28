@@ -39,9 +39,9 @@ class ReaderManager extends Manager
     /**
      * Create an instance of the ipstack driver.
      */
-    protected function createGeoip2Driver(): GeoIp2
+    protected function createMaxMindDriver(): MaxMind
     {
-        return resolve(GeoIp2::class);
+        return resolve(MaxMind::class);
     }
 
     /**

@@ -31,12 +31,6 @@ parameters:
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Left side of && is always true\.$#'
-			identifier: booleanAnd.leftAlwaysTrue
-			count: 1
-			path: src/Classes/Tracker.php
-
-		-
 			message: '#^Method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 3
@@ -61,28 +55,10 @@ parameters:
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Right side of \|\| is always true\.$#'
-			identifier: booleanOr.rightAlwaysTrue
-			count: 1
-			path: src/Classes/Tracker.php
-
-		-
-			message: '#^Ternary operator condition is always true\.$#'
-			identifier: ternary.alwaysTrue
-			count: 3
-			path: src/Classes/Tracker.php
-
-		-
-			message: '#^Right side of && is always true\.$#'
-			identifier: booleanAnd.rightAlwaysTrue
-			count: 1
-			path: src/Extension.php
-
-		-
 			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
 			identifier: cast.int
 			count: 1
-			path: src/GeoIp/GeoIp2.php
+			path: src/GeoIp/MaxMind.php
 
 		-
 			message: '#^Access to an undefined property \$this\(IgniterLabs\\VisitorTracker\\Models\\PageVisit\)\:\:\$headers\.$#'
@@ -117,5 +93,11 @@ parameters:
 		-
 			message: '#^Argument of an invalid type Illuminate\\Routing\\RouteCollectionInterface supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
+			count: 1
+			path: src/Models/Settings.php
+
+		-
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			identifier: cast.int
 			count: 1
 			path: src/Models/Settings.php

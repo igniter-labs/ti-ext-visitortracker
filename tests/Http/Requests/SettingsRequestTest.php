@@ -34,8 +34,8 @@ it('defines validation rules', function(): void {
         ->and($rules)->toHaveKey('exclude_ips', ['nullable', 'string'])
         ->and($rules)->toHaveKey('online_time_out', ['required', 'integer'])
         ->and($rules)->toHaveKey('archive_time_out', ['required', 'integer'])
-        ->and($rules)->toHaveKey('geoip_reader', ['nullable', 'in:geoip2,ipstack'])
+        ->and($rules)->toHaveKey('geoip_reader', ['nullable', 'in:maxmind,ipstack'])
         ->and($rules)->toHaveKey('geoip_reader_ipstack_access_key', ['nullable', 'required_if:geoip_reader,ipstack', 'string'])
-        ->and($rules)->toHaveKey('geoip_reader_maxmind_account_id', ['nullable', 'required_if:geoip_reader,geoip2', 'string'])
-        ->and($rules)->toHaveKey('geoip_reader_maxmind_license_key', ['nullable', 'required_if:geoip_reader,geoip2', 'string']);
+        ->and($rules)->toHaveKey('geoip_reader_maxmind_account_id', ['nullable', 'required_if:geoip_reader,maxmind', 'string'])
+        ->and($rules)->toHaveKey('geoip_reader_maxmind_license_key', ['nullable', 'required_if:geoip_reader,maxmind', 'string']);
 });

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace IgniterLabs\VisitorTracker\Tests\Classes;
 
 use IgniterLabs\VisitorTracker\Classes\Tracker;
-use IgniterLabs\VisitorTracker\GeoIp\GeoIp2;
+use IgniterLabs\VisitorTracker\GeoIp\MaxMind;
 use IgniterLabs\VisitorTracker\GeoIp\ReaderManager;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Jenssegers\Agent\Agent;
 
@@ -19,9 +20,14 @@ beforeEach(function(): void {
 });
 
 it('tracks visitor when all conditions are met', function(): void {
+    Http::fake([
+        'http://api.ipstack.com/192.168.0.1?access_key=valid-access-key' => Http::response(),
+    ]);
     Settings::set([
         'status' => true,
         'track_robots' => false,
+        'geoip_reader' => 'ipstack',
+        'geoip_reader_ipstack_access_key' => 'valid-access-key',
     ]);
     $request = Request::create('/test-uri');
     app()->instance('request', $request);
@@ -41,18 +47,21 @@ it('tracks visitor with geo ip data when all conditions are met', function(): vo
     Settings::set([
         'status' => true,
         'track_robots' => false,
+        'geoip_reader' => 'maxmind',
+        'geoip_reader_maxmind_account_id' => '12345',
+        'geoip_reader_maxmind_license_key' => 'valid-license-key',
     ]);
     $request = Request::create('/test-uri');
     app()->instance('request', $request);
     app()->instance(ReaderManager::class, $reader = mock(ReaderManager::class))->makePartial();
-    $reader->shouldReceive('retrieve')->andReturn($geoIp2 = mock(GeoIp2::class)->makePartial());
-    $geoIp2->shouldReceive('hasRecord')->andReturnTrue();
-    $geoIp2->shouldReceive('latitude')->andReturn('12.3456');
-    $geoIp2->shouldReceive('longitude')->andReturn('65.4321');
-    $geoIp2->shouldReceive('region')->andReturn('Test Region');
-    $geoIp2->shouldReceive('city')->andReturn('Test City');
-    $geoIp2->shouldReceive('postalCode')->andReturn('12345');
-    $geoIp2->shouldReceive('countryISOCode')->andReturn('TC');
+    $reader->shouldReceive('retrieve')->andReturn($maxMind = mock(MaxMind::class)->makePartial());
+    $maxMind->shouldReceive('hasRecord')->andReturnTrue();
+    $maxMind->shouldReceive('latitude')->andReturn('12.3456');
+    $maxMind->shouldReceive('longitude')->andReturn('65.4321');
+    $maxMind->shouldReceive('region')->andReturn('Test Region');
+    $maxMind->shouldReceive('city')->andReturn('Test City');
+    $maxMind->shouldReceive('postalCode')->andReturn('12345');
+    $maxMind->shouldReceive('countryISOCode')->andReturn('TC');
 
     $tracker = resolve(Tracker::class);
     $tracker->boot();

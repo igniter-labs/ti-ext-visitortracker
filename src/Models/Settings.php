@@ -24,6 +24,27 @@ class Settings extends Model
     // Reference to field configuration
     public string $settingsFieldsConfig = 'settings';
 
+    public static function isConnected(): bool
+    {
+        return self::get('status') && (
+            self::isMaxMindReaderConfigured()
+            || self::isIpstackReaderConfigured()
+        );
+    }
+
+    public static function isMaxMindReaderConfigured(): bool
+    {
+        return self::get('geoip_reader') === 'maxmind'
+            && (int)self::get('geoip_reader_maxmind_account_id')
+            && strlen((string)self::get('geoip_reader_maxmind_license_key'));
+    }
+
+    public static function isIpstackReaderConfigured(): bool
+    {
+        return self::get('geoip_reader') === 'ipstack'
+            && strlen((string)self::get('geoip_reader_ipstack_access_key'));
+    }
+
     public function listAvailableRoutes()
     {
         $routes = [];
