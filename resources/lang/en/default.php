@@ -46,6 +46,7 @@ return [
 
     'column_id' => 'ID',
     'column_ip' => 'IP',
+    'column_country_city' => 'Country City',
     'column_customer' => 'Customer',
     'column_access' => 'Access',
     'column_browser' => 'Browser',
