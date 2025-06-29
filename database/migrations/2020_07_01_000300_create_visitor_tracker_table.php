@@ -1,6 +1,6 @@
 <?php
 
-namespace IgniterLabs\VisitorTracker\Database\Migrations;
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Create igniter_visitortracker_tracker table.
  */
-class CreateVisitorTrackerTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         DB::table('extension_settings')
             ->where('item', 'igniter_onlinetracker_settings')
@@ -25,13 +25,13 @@ class CreateVisitorTrackerTable extends Migration
         $this->createGeoIpTable();
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('igniterlabs_visitortracker_tracker');
         Schema::dropIfExists('igniterlabs_visitortracker_geoip');
     }
 
-    protected function createTrackerTable()
+    protected function createTrackerTable(): void
     {
         if (Schema::hasTable('igniter_onlinetracker_tracker')) {
             Schema::rename('igniter_onlinetracker_tracker', 'igniterlabs_visitortracker_tracker');
@@ -42,7 +42,7 @@ class CreateVisitorTrackerTable extends Migration
         if (Schema::hasTable('customers_online')) {
             Schema::rename('customers_online', 'igniterlabs_visitortracker_tracker');
 
-            Schema::table('igniterlabs_visitortracker_tracker', function (Blueprint $table) {
+            Schema::table('igniterlabs_visitortracker_tracker', function(Blueprint $table): void {
                 $table->bigIncrements('activity_id')->change();
                 $table->string('session_id')->nullable();
                 $table->integer('geoip_id')->nullable();
@@ -56,7 +56,7 @@ class CreateVisitorTrackerTable extends Migration
             return;
         }
 
-        Schema::create('igniterlabs_visitortracker_tracker', function (Blueprint $table) {
+        Schema::create('igniterlabs_visitortracker_tracker', function(Blueprint $table): void {
             $table->engine = 'InnoDB';
             $table->bigIncrements('activity_id');
             $table->integer('customer_id');
@@ -78,7 +78,7 @@ class CreateVisitorTrackerTable extends Migration
         });
     }
 
-    protected function createGeoIpTable()
+    protected function createGeoIpTable(): void
     {
         if (Schema::hasTable('igniter_onlinetracker_geoip')) {
             Schema::rename('igniter_onlinetracker_geoip', 'igniterlabs_visitortracker_geoip');
@@ -86,16 +86,16 @@ class CreateVisitorTrackerTable extends Migration
             return;
         }
 
-        Schema::create('igniterlabs_visitortracker_geoip', function (Blueprint $table) {
+        Schema::create('igniterlabs_visitortracker_geoip', function(Blueprint $table): void {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->double('latitude')->nullable()->index();
-            $table->double('longitude')->nullable()->index();
+            $table->double('latitude')->nullable()->index('visitortracker_geoip_latitude_index');
+            $table->double('longitude')->nullable()->index('visitortracker_geoip_longitude_index');
             $table->string('region')->nullable();
-            $table->string('city')->nullable()->index();
+            $table->string('city')->nullable()->index('visitortracker_geoip_city_index');
             $table->string('postal_code')->nullable();
-            $table->string('country_iso_code_2')->nullable()->index();
+            $table->string('country_iso_code_2')->nullable()->index('visitortracker_geoip_country_iso_code_2_index');
             $table->timestamps();
         });
     }
-}
+};
