@@ -1,7 +1,7 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
 			identifier: cast.int
 			count: 1
 			path: src/Classes/RepositoryManager.php
@@ -55,7 +55,7 @@ parameters:
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
 			identifier: cast.int
 			count: 1
 			path: src/GeoIp/MaxMind.php
@@ -73,7 +73,7 @@ parameters:
 			path: src/Models/PageVisit.php
 
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
 			identifier: cast.int
 			count: 2
 			path: src/Models/PageVisit.php
@@ -97,7 +97,7 @@ parameters:
 			path: src/Models/Settings.php
 
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
 			identifier: cast.int
 			count: 1
 			path: src/Models/Settings.php
