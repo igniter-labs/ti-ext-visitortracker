@@ -205,7 +205,7 @@ class Tracker
 
     protected function ipRangeIsDashed(string $range): ?array
     {
-        if (count($twoIps = explode('-', $range)) == 2) {
+        if (count($twoIps = explode('-', $range)) === 2) {
             return $twoIps;
         }
 
@@ -216,7 +216,7 @@ class Tracker
     {
         $ipv4_arr = explode('/', $network);
 
-        if (count($ipv4_arr) == 1) {
+        if (count($ipv4_arr) === 1) {
             $ipv4_arr[1] = '255.255.255.255';
         }
 
@@ -235,7 +235,7 @@ class Tracker
 
     protected function explodeString(string $string): array
     {
-        return array_map('trim', explode(',', str_replace("\n", ',', $string)));
+        return array_map(trim(...), explode(',', str_replace("\n", ',', $string)));
     }
 
     protected function matchesPattern($what, $patterns): bool
