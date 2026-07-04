@@ -163,13 +163,7 @@ class Tracker
 
     protected function ipNotInRanges(string $ip, array $excludeRange): bool
     {
-        foreach ($excludeRange as $range) {
-            if ($this->ipInRange($ip, $range)) {
-                return false;
-            }
-        }
-
-        return true;
+        return array_all($excludeRange, fn(string $range): bool => !$this->ipInRange($ip, $range));
     }
 
     protected function ipInRange(string $ip, string $range)
