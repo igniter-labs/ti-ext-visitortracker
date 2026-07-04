@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace IgniterLabs\VisitorTracker\Tests\Http\Middleware;
 
+use Igniter\Main\Http\Middleware\CheckInitialSetup;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 use IgniterLabs\VisitorTracker\Models\Settings;
 
@@ -16,7 +17,8 @@ it('can track visitor', function(): void {
         'track_robots' => false,
     ]);
 
-    $this->get(route('igniter.theme.home'))
+    $this->withoutMiddleware(CheckInitialSetup::class)
+        ->get(route('igniter.theme.home'))
         ->assertOk();
 
     $pageVisitQuery = PageVisit::query()->where([
