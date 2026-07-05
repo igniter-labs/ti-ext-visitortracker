@@ -11,7 +11,7 @@ use IgniterLabs\VisitorTracker\Models\Settings;
 beforeEach(fn() => Settings::flushEventListeners());
 
 it('can track visitor', function(): void {
-    PageVisit::query()->truncate();
+    PageVisit::query()->delete();
     Settings::set([
         'status' => true,
         'track_robots' => false,
@@ -29,7 +29,7 @@ it('can track visitor', function(): void {
 });
 
 it('does not track admin pages', function(): void {
-    PageVisit::query()->truncate();
+    PageVisit::query()->delete();
     Settings::set([
         'status' => true,
         'track_robots' => false,

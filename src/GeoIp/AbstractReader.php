@@ -13,8 +13,6 @@ abstract class AbstractReader
 
     /**
      * Fetch data from a remote geoapi service.
-     *
-     * @return $this
      */
     abstract public function retrieve(string $ip): static;
 

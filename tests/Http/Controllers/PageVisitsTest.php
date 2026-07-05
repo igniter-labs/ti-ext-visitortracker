@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace IgniterLabs\VisitorTracker\Tests\Http\Controllers;
 
 use Igniter\User\Models\Customer;
+use IgniterLabs\VisitorTracker\Http\Middleware\TrackVisitor;
 use IgniterLabs\VisitorTracker\Models\GeoIp;
 use IgniterLabs\VisitorTracker\Models\PageVisit;
 
@@ -29,6 +30,7 @@ it('can access page visits index', function(): void {
     ]);
 
     actingAsSuperUser()
+        ->withoutMiddleware(TrackVisitor::class)
         ->get(route('igniterlabs.visitortracker.page_visits'))
         ->assertOk();
 });

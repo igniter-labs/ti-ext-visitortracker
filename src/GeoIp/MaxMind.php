@@ -15,8 +15,6 @@ class MaxMind extends AbstractReader
 {
     /**
      * Fetch data from a remote geoapi service.
-     *
-     * @return $this
      */
     #[Override]
     public function retrieve(string $ip): static
