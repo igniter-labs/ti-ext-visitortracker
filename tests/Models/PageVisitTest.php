@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 it('clears all existing page visits', function(): void {
     $this->travelTo(now()->subMonths(6));
     Settings::set('archive_time_out', 2);
-    PageVisit::query()->truncate();
+    PageVisit::query()->delete();
     PageVisit::factory()->create(['ip_address' => '127.0.0.1']);
     $this->travelBack();
 
