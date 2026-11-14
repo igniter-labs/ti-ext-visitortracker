@@ -1,13 +1,13 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
 			identifier: cast.int
 			count: 1
 			path: src/Classes/RepositoryManager.php
 
 		-
-			message: '#^Static method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Static method Igniter\\Flame\\Database\\Builder\<IgniterLabs\\VisitorTracker\\Models\\Settings\>\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 1
 			path: src/Classes/RepositoryManager.php
@@ -31,7 +31,7 @@ parameters:
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Method Igniter\\Flame\\Database\\Builder\<IgniterLabs\\VisitorTracker\\Models\\Settings\>\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 3
 			path: src/Classes/Tracker.php
@@ -43,19 +43,19 @@ parameters:
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Parameter \#1 \$reader of method IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager\:\:setDefaultDriver\(\) expects string, Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			message: '#^Parameter \#1 \$reader of method IgniterLabs\\VisitorTracker\\GeoIp\\ReaderManager\:\:setDefaultDriver\(\) expects string, Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Parameter \#1 \$string of method IgniterLabs\\VisitorTracker\\Classes\\Tracker\:\:explodeString\(\) expects string, Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> given\.$#'
+			message: '#^Parameter \#1 \$string of method IgniterLabs\\VisitorTracker\\Classes\\Tracker\:\:explodeString\(\) expects string, Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> given\.$#'
 			identifier: argument.type
 			count: 3
 			path: src/Classes/Tracker.php
 
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
 			identifier: cast.int
 			count: 1
 			path: src/GeoIp/MaxMind.php
@@ -73,19 +73,19 @@ parameters:
 			path: src/Models/PageVisit.php
 
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
 			identifier: cast.int
 			count: 2
 			path: src/Models/PageVisit.php
 
 		-
-			message: '#^Method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:getLastOnline\(\) should return static\(IgniterLabs\\VisitorTracker\\Models\\PageVisit\)\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method IgniterLabs\\VisitorTracker\\Models\\PageVisit\:\:getLastOnline\(\) should return static\(IgniterLabs\\VisitorTracker\\Models\\PageVisit\)\|null but returns IgniterLabs\\VisitorTracker\\Models\\PageVisit\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: src/Models/PageVisit.php
 
 		-
-			message: '#^Static method Igniter\\Flame\\Database\\Builder\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Static method Igniter\\Flame\\Database\\Builder\<IgniterLabs\\VisitorTracker\\Models\\Settings\>\:\:get\(\) invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 2
 			path: src/Models/PageVisit.php
@@ -97,7 +97,7 @@ parameters:
 			path: src/Models/Settings.php
 
 		-
-			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\> to int\.$#'
+			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Collection\<int, IgniterLabs\\VisitorTracker\\Models\\Settings\> to int\.$#'
 			identifier: cast.int
 			count: 1
 			path: src/Models/Settings.php
