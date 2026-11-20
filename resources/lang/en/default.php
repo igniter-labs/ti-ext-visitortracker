@@ -3,15 +3,12 @@
 return [
     'text_title' => 'Page Visits',
 
-    'text_online' => 'Online',
-    'text_all' => 'All',
     'text_filter_search' => 'Search by ip, customer or browser.',
     'text_filter_access' => 'View all access',
     'text_filter_date' => 'View all dates',
     'text_filter_online' => 'View recently online',
     'text_empty' => 'There are no page visits.',
     'text_guest' => 'Guest',
-    'text_private' => 'Private',
     'text_browser' => 'Browser',
     'text_mobile' => 'Phone',
     'text_tablet' => 'Tablet',
@@ -27,10 +24,8 @@ return [
     'text_ipstack' => 'Ipstack',
 
     'button_settings' => 'Settings',
-    'button_update' => 'Update GeoIp Database',
     'button_page_views' => 'Page Views',
     'button_page_visits' => 'Page Visits',
-    'button_view_all' => 'View Previously Online',
 
     'label_status' => 'Tracker Status',
     'label_track_robots' => 'Track Robots',
@@ -44,16 +39,13 @@ return [
     'label_geoip_reader_maxmind_account_id' => 'Maxmind Account ID',
     'label_geoip_reader_maxmind_license_key' => 'Maxmind License Key',
 
-    'column_id' => 'ID',
     'column_ip' => 'IP',
-    'column_country_city' => 'Country City',
     'column_customer' => 'Customer',
     'column_access' => 'Access',
     'column_browser' => 'Browser',
     'column_country' => 'Country/City',
     'column_views' => 'Page Views',
     'column_platform' => 'Device',
-    'column_agent' => 'User Agent',
     'column_request_uri' => 'Last Request URL',
     'column_referrer_url' => 'Last Referrer URL',
     'column_last_activity' => 'Last Activity',
@@ -68,7 +60,4 @@ return [
         'text_empty' => 'There are no page views.',
     ],
 
-    'dashboard' => [
-        'text_page_views_chart' => 'Page Views',
-    ],
 ];
