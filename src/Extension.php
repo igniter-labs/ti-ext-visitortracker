@@ -118,6 +118,7 @@ class Extension extends BaseExtension
         Charts::registerDatasets(fn(): array => [
             'pageviews' => [
                 'label' => 'igniterlabs.visitortracker::default.views.text_title',
+                'permission' => 'IgniterLabs.VisitorTracker.*',
                 'sets' => [
                     [
                         'label' => 'igniterlabs.visitortracker::default.views.text_title',
